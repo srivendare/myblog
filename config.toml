@@ -1,4 +1,4 @@
 baseURL = 'https://srivendare.github.io/myblog/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
-theme = "aether"
+title = 'Rui'
+theme = "harbor"
