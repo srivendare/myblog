@@ -1,5 +1,6 @@
 ---
 title: Diary 1
+author: "Rui"
 categories:
 - diary
 date: 2022-09-19

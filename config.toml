@@ -50,7 +50,7 @@ whatsapp = ""
 
 # Comments settigns
 [params.comments]
-enabled = true
+enabled = false
 provider = "disqus"
 
 [menu]
