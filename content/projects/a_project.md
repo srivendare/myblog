@@ -1,9 +1,9 @@
 ---
-title: "Hugo Tania Theme"
-date: 2020-11-26
-description: Make a blog with hugo tania theme!
+title: "Cx Club"
+date: 2022-09-01
+description: A web3.0 BBS
 weight: 1
-link: https://github.com/WingLim/hugo-tania
-repo: https://github.com/WingLim/hugo-tania
-icon: 📝
+link: https://onlybuilders.vercel.app/
+repo: https://onlybuilders.vercel.app/
+icon: 👾
 ---
