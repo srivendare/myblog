@@ -1,4 +1,4 @@
-baseurl = "https://srivendare.github.io/myblog/"
+baseurl = "https://srivendare.github.io/"
 languageCode = "en-us"
 title = "Sanggiya"
 theme = "tania"
