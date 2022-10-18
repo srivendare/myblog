@@ -1,14 +1,34 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sanggiya</title><link>https://srivendare.github.io/</link><description>Recent content on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 01 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Plotly Charts in Flaks</title><link>https://srivendare.github.io/post/diary_1/</link><pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/diary_1/</guid><description>
 &lt;p>This ariticle aims to give an idea about how to use plot.ly in Flask App.&lt;/p>
-&lt;p>On the route&lt;/p>
-&lt;pre tabindex="0">&lt;code># Create a plotly chart object
-fig = px.bar(industry_report , x=&amp;#39;grade&amp;#39;, y=&amp;#39;num&amp;#39;)
-# Get json from the chart
-figJson = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-&lt;/code>&lt;/pre>&lt;p>On the page&lt;/p>
-&lt;pre tabindex="0">&lt;code>var graphs = {{ figJson | safe }};
-Plotly.plot(&amp;#39;chart&amp;#39;,graphs, {});
-&lt;/code>&lt;/pre></description></item><item><title>Footnote test</title><link>https://srivendare.github.io/post/footnote/</link><pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/footnote/</guid><description>
+&lt;p>On the route, pass json to HTML&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Create a plotly chart object&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">fig&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">px&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">bar&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">industry_report&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;grade&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;num&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Get json from the chart&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">figJson&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">json&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dumps&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">fig&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="bp">cls&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">plotly&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">utils&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">PlotlyJSONEncoder&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>On the page, get json from python and create chart object&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">graphs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{{&lt;/span> &lt;span class="nx">figJson&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nx">safe&lt;/span> &lt;span class="p">}};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">Plotly&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;chart&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="nx">graphs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Footnote test</title><link>https://srivendare.github.io/post/footnote/</link><pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/footnote/</guid><description>
 &lt;p>Lorem ipsum dolor sit amet&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum consequatur animi.&lt;/p>
 &lt;p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup> consequatur animi.&lt;/p>
 &lt;p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum consequatur animi.&lt;/p>

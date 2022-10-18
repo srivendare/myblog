@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Flask on Sanggiya</title><link>https://srivendare.github.io/categories/flask/</link><description>Recent content in Flask on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 19 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/categories/flask/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Plotly Charts in Flaks</title><link>https://srivendare.github.io/post/diary_1/</link><pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/diary_1/</guid><description>This ariticle aims to give an idea about how to use plot.ly in Flask App.
-On the route
-# Create a plotly chart object fig = px.bar(industry_report , x=&amp;#39;grade&amp;#39;, y=&amp;#39;num&amp;#39;) # Get json from the chart figJson = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) On the page
-var graphs = {{ figJson | safe }}; Plotly.plot(&amp;#39;chart&amp;#39;,graphs, {});</description></item></channel></rss>
+On the route, pass json to HTML
+1 2 3 4 # Create a plotly chart object fig = px.bar(industry_report , x=&amp;#39;grade&amp;#39;, y=&amp;#39;num&amp;#39;) # Get json from the chart figJson = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder) On the page, get json from python and create chart object
+1 2 3 var graphs = {{ figJson | safe }}; Plotly.</description></item></channel></rss>
