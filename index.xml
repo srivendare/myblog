@@ -1,5 +1,14 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sanggiya</title><link>https://srivendare.github.io/</link><description>Recent content on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 19 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Diary 1</title><link>https://srivendare.github.io/post/diary_1/</link><pubDate>Mon, 19 Sep 2022 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/diary_1/</guid><description>
-&lt;p>Simple testing of my blog composing&lt;/p></description></item><item><title>Footnote test</title><link>https://srivendare.github.io/post/footnote/</link><pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/footnote/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sanggiya</title><link>https://srivendare.github.io/</link><description>Recent content on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 01 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Using Plotly Charts in Flaks</title><link>https://srivendare.github.io/post/diary_1/</link><pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/diary_1/</guid><description>
+&lt;p>This ariticle aims to give an idea about how to use plot.ly in Flask App.&lt;/p>
+&lt;p>On the route&lt;/p>
+&lt;pre tabindex="0">&lt;code># Create a plotly chart object
+fig = px.bar(industry_report , x=&amp;#39;grade&amp;#39;, y=&amp;#39;num&amp;#39;)
+# Get json from the chart
+figJson = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+&lt;/code>&lt;/pre>&lt;p>On the page&lt;/p>
+&lt;pre tabindex="0">&lt;code>var graphs = {{ figJson | safe }};
+Plotly.plot(&amp;#39;chart&amp;#39;,graphs, {});
+&lt;/code>&lt;/pre></description></item><item><title>Footnote test</title><link>https://srivendare.github.io/post/footnote/</link><pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/footnote/</guid><description>
 &lt;p>Lorem ipsum dolor sit amet&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum consequatur animi.&lt;/p>
 &lt;p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup> consequatur animi.&lt;/p>
 &lt;p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum consequatur animi.&lt;/p>
