@@ -24,9 +24,8 @@ author = "Hugo Tania"
 [params.colorScheme]
 # Enable toggle colorScheme
 # Default to true
-default = auto
-
 toggle = true
+
 # Default colorScheme
 # Default to auto
 # Limit how many categories filter show above search input.
@@ -51,12 +50,12 @@ whatsapp = ""
 
 # Comments settigns
 [params.comments]
-enabled = true
+enabled = false
 provider = "disqus"
 
 [menu]
 [[menu.header]]
-name = "Articles"
+name = "Tags"
 url = "/articles/"
 [[menu.footer]]
 name = "RSS"
