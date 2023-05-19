@@ -1,5 +1,5 @@
 ---
-title: "Cx Club"
+title: "Cx Club La"
 date: 2022-09-01
 description: A web3.0 BBS
 weight: 1
