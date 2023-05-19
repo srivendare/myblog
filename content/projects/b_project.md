@@ -1,9 +1,9 @@
 ---
-title: "Cx Club LaLaLa"
+title: "Walks in Toronto"
 date: 2022-09-01
-description: A web3.0 BBS
+description: Determine where I can reach
 weight: 1
-link: https://onlybuilders.vercel.app/
-repo: https://onlybuilders.vercel.app/
-icon: 👾
+link: 
+repo: 
+icon: 🚗
 ---
