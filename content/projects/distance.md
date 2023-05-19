@@ -1,9 +1,9 @@
 ---
-title: "How far can you go?"
-date: 2022-01-09
-description: Showing the mobility info in North York, Toronto
+title: "Cx Club"
+date: 2022-09-01
+description: A web3.0 BBS
 weight: 1
-link: 
-repo: 
-icon: 🛞
+link: https://onlybuilders.vercel.app/
+repo: https://onlybuilders.vercel.app/
+icon: 👾
 ---
