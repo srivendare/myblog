@@ -1,4 +1,146 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sanggiya</title><link>https://srivendare.github.io/</link><description>Recent content on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 01 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Playing yfinance with Pandas</title><link>https://srivendare.github.io/post/play_yfinance/</link><pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/play_yfinance/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sanggiya</title><link>https://srivendare.github.io/</link><description>Recent content on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Golang Cheatsheet</title><link>https://srivendare.github.io/post/golang_cheatsheet/</link><pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/golang_cheatsheet/</guid><description>
+&lt;p>2022-03-06&lt;/p>
+&lt;p>Recently I need to maintain colleague&amp;rsquo;s web scrapers in Golang, here are some notes I took during self-learning, I will keep on updating this article&lt;/p>
+&lt;ol>
+&lt;li>Lorca a tool for connect and communicate with web Serber&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">
+&lt;span class="kn">package&lt;/span> &lt;span class="nx">main&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;span class="s">&amp;#34;os&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;os/signal&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;syscall&amp;#34;&lt;/span>
+&lt;span class="s">&amp;#34;github.com/zserge/lorca&amp;#34;&lt;/span>
+&lt;span class="p">)&lt;/span>
+&lt;span class="kd">func&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="kd">var&lt;/span> &lt;span class="nx">ui&lt;/span> &lt;span class="nx">lorca&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">UI&lt;/span>
+&lt;span class="nx">ui&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">_&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nx">lorca&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">New&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;https://baidu.com&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">800&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">600&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;--display-sync&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;--display-translate&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nx">chSignal&lt;/span> &lt;span class="o">:=&lt;/span> &lt;span class="nb">make&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">chan&lt;/span> &lt;span class="nx">os&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Signal&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nx">signal&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Notify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">chSignal&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">syscall&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SIGINT&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">syscall&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SIGTERM&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">select&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">case&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span>&lt;span class="nx">ui&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Done&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;span class="k">case&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span>&lt;span class="nx">chSignal&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="c1">// close ui
+&lt;/span>&lt;span class="c1">&lt;/span> &lt;span class="nx">ui&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Close&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The key point of this code block is event listening,&lt;/p>
+&lt;p>the &lt;code>chrome browser&lt;/code> and &lt;code>ui server&lt;/code> are in different thread, this listener make all process end if there is one process interrupted or terminated&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go"> &lt;span class="nx">signal&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Notify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">chSignal&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">syscall&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SIGINT&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nx">syscall&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">SIGTERM&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">select&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="k">case&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span>&lt;span class="nx">ui&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nf">Done&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;span class="k">case&lt;/span> &lt;span class="o">&amp;lt;-&lt;/span>&lt;span class="nx">chSignal&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>An Async Example for API request</title><link>https://srivendare.github.io/post/async/</link><pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/async/</guid><description>
+&lt;p>To do multiple tasks with &lt;code>async.map&lt;/code> &lt;em>asynchronously&lt;/em> you have to:&lt;/p>
+&lt;ol>
+&lt;li>Define a function for what you want to do with each object (your task)&lt;/li>
+&lt;li>Add that function as an event hook in your request&lt;/li>
+&lt;li>Call &lt;code>async.map&lt;/code> on a list of all the requests / actions&lt;/li>
+&lt;/ol>
+&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="kn">from&lt;/span> &lt;span class="nn">requests&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="k">async&lt;/span>
+&lt;span class="c1"># from grequests import async&lt;/span>
+&lt;span class="n">urls&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="s1">&amp;#39;http://python-requests.org&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s1">&amp;#39;http://httpbin.org&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s1">&amp;#39;http://python-guide.org&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s1">&amp;#39;http://kennethreitz.com&amp;#39;&lt;/span>
+&lt;span class="p">]&lt;/span>
+&lt;span class="c1"># A simple task to do to each response object&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">do_something&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="nb">print&lt;/span> &lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">url&lt;/span>
+&lt;span class="c1"># A list to hold our things to do via async&lt;/span>
+&lt;span class="n">async_list&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">u&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">urls&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="c1"># The &amp;#34;hooks = {...&amp;#34; part is where you define what you want to do&lt;/span>
+&lt;span class="c1"># &lt;/span>
+&lt;span class="c1"># Note the lack of parentheses following do_something, this is&lt;/span>
+&lt;span class="c1"># because the response will be used as the first argument automatically&lt;/span>
+&lt;span class="n">action_item&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">async&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">u&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">hooks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s1">&amp;#39;response&amp;#39;&lt;/span> &lt;span class="p">:&lt;/span> &lt;span class="n">do_something&lt;/span>&lt;span class="p">})&lt;/span>
+&lt;span class="c1"># Add the task to our list of things to do via async&lt;/span>
+&lt;span class="n">async_list&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">action_item&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="c1"># Do our list of things to do via async&lt;/span>
+&lt;span class="k">async&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">async_list&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Playing yfinance with Pandas</title><link>https://srivendare.github.io/post/play_yfinance/</link><pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/play_yfinance/</guid><description>
 &lt;p>Due to personal issue, I need to track Forex info recently. However, unlike professional trader, I don&amp;rsquo;t need ticker for every minutes, but day by date is to rough. So this project is a simple &lt;code>pandas&lt;/code> manuplation about &lt;code>yfinance&lt;/code> API in python, the final aim is to build a FastAPI with &lt;code>['morning', 'day', 'evening']&lt;/code> avg forex data,&lt;/p>
 &lt;p>Let&amp;rsquo;s start by import dependencies:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -11,38 +153,36 @@
 &lt;/span>&lt;span class="lnt">6
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># For data manipulation&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">np&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">pandas&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">pd&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># To fetch financial data&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">yfinance&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">yf&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="c1"># For data manipulation&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">np&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">pandas&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">pd&lt;/span>
+&lt;span class="c1"># To fetch financial data&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">yfinance&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">yf&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Get the data frame in API&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;span class="lnt">4
-&lt;/span>&lt;span class="lnt">5
-&lt;/span>&lt;span class="lnt">6
-&lt;/span>&lt;span class="lnt">7
-&lt;/span>&lt;span class="lnt">8
-&lt;/span>&lt;span class="lnt">9
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Set the ticker as &amp;#39;EURUSD=X&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">forex_data_minute&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">yf&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">download&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;CADCNY=X&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">period&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;60d&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">interval&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;15m&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Clear the index info with Api&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">forex_data_minute&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">forex_data_minute&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">reset_index&lt;/span>&lt;span class="p">()&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Set date and hour from timestamp in API&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;hour&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to_datetime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;Datetime&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">hour&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;date&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to_datetime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;Datetime&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">date&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="c1"># Set the ticker as &amp;#39;EURUSD=X&amp;#39;&lt;/span>
+&lt;span class="n">forex_data_minute&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">yf&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">download&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;CADCNY=X&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">period&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;60d&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">interval&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;15m&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="c1"># Clear the index info with Api&lt;/span>
+&lt;span class="n">forex_data_minute&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">forex_data_minute&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">reset_index&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="c1"># Set date and hour from timestamp in API&lt;/span>
+&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;hour&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to_datetime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;Datetime&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">hour&lt;/span>
+&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;date&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to_datetime&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;Datetime&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">date&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Next step is the core part, which used &lt;code>pd.cut&lt;/code> method to create bins&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -59,17 +199,15 @@
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Provide bin&amp;amp; lebals info&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">bins&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">12&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">18&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">24&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">labels&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;Morning&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Day time&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Evening&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Make bin info within dataframe&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">average&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;day_time&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cut&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;hour&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">bins&lt;/span>&lt;span class="o">=&lt;/span> &lt;span class="n">bins&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">labels&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">labels&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">include_lowest&lt;/span> &lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Aggregate final results&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">groupby&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s1">&amp;#39;date&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;day_time&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">agg&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="s1">&amp;#39;Adj Close&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">average&lt;/span> &lt;span class="p">})&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="c1"># Provide bin&amp;amp; lebals info&lt;/span>
+&lt;span class="n">bins&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">12&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">18&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">24&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">labels&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;Morning&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Day time&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;Evening&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="c1"># Make bin info within dataframe&lt;/span>
+&lt;span class="kn">from&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">average&lt;/span>
+&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;day_time&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cut&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;hour&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">bins&lt;/span>&lt;span class="o">=&lt;/span> &lt;span class="n">bins&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">labels&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">labels&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">include_lowest&lt;/span> &lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="c1"># Aggregate final results&lt;/span>
+&lt;span class="n">forex_data_minute&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">groupby&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s1">&amp;#39;date&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;day_time&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">agg&lt;/span>&lt;span class="p">({&lt;/span>&lt;span class="s1">&amp;#39;Adj Close&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">average&lt;/span> &lt;span class="p">})&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Next step make a function for creating a FastAPI &amp;hellip;&lt;/p></description></item><item><title>Using Plotly Charts in Flaks</title><link>https://srivendare.github.io/post/diary_1/</link><pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/diary_1/</guid><description>
 &lt;p>This ariticle aims to give an idea about how to use plot.ly in Flask App.&lt;/p>
@@ -82,11 +220,11 @@
 &lt;/span>&lt;span class="lnt">4
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Create a plotly chart object&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">fig&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">px&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">bar&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">industry_report&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;grade&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;num&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Get json from the chart&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">figJson&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">json&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dumps&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">fig&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="bp">cls&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">plotly&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">utils&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">PlotlyJSONEncoder&lt;/span>&lt;span class="p">)&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="c1"># Create a plotly chart object&lt;/span>
+&lt;span class="n">fig&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">px&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">bar&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">industry_report&lt;/span> &lt;span class="p">,&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;grade&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;num&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="c1"># Get json from the chart&lt;/span>
+&lt;span class="n">figJson&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">json&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dumps&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">fig&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="bp">cls&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">plotly&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">utils&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">PlotlyJSONEncoder&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>On the page, get json from python and create chart object&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -94,29 +232,29 @@
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
 &lt;/span>&lt;span class="lnt">2
 &lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nx">graphs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{{&lt;/span> &lt;span class="nx">figJson&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nx">safe&lt;/span> &lt;span class="p">}};&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">Plotly&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;chart&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="nx">graphs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{});&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-javascript" data-lang="javascript">&lt;span class="kd">var&lt;/span> &lt;span class="nx">graphs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{{&lt;/span> &lt;span class="nx">figJson&lt;/span> &lt;span class="o">|&lt;/span> &lt;span class="nx">safe&lt;/span> &lt;span class="p">}};&lt;/span>
+&lt;span class="nx">Plotly&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;chart&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="nx">graphs&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{});&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div></description></item><item><title>Footnote test</title><link>https://srivendare.github.io/post/footnote/</link><pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/footnote/</guid><description>
 &lt;p>Lorem ipsum dolor sit amet&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum consequatur animi.&lt;/p>
 &lt;p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup> consequatur animi.&lt;/p>
 &lt;p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum consequatur animi.&lt;/p>
 &lt;p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum consequatur animi.&lt;/p>
-&lt;div class="footnotes" role="doc-endnotes">
+&lt;section class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1">
+&lt;li id="fn:1" role="doc-endnote">
 &lt;p>Test Footnote&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2">
+&lt;li id="fn:2" role="doc-endnote">
 &lt;p>Test Footnote2&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description></item><item><title>Katex support</title><link>https://srivendare.github.io/post/test-katex/</link><pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate><author>Hugo Authors</author><guid>https://srivendare.github.io/post/test-katex/</guid><description>
+&lt;/section></description></item><item><title>Katex support</title><link>https://srivendare.github.io/post/test-katex/</link><pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate><author>Hugo Authors</author><guid>https://srivendare.github.io/post/test-katex/</guid><description>
 &lt;p>The following&lt;/p>
 &lt;p>$$ \int_{a}^{b} x^2 dx $$&lt;/p>
 &lt;p>Is an integral&lt;/p>
@@ -128,8 +266,8 @@
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-latex" data-lang="latex">&lt;span class="line">&lt;span class="cl">Inline math: &lt;span class="s">$&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\varphi&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\dfrac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\sqrt&lt;/span>&lt;span class="m">5&lt;/span>&lt;span class="nb">}{&lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="nb">}&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">.&lt;/span>&lt;span class="m">6180339887&lt;/span>&lt;span class="nb">… &lt;/span>&lt;span class="s">$&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-latex" data-lang="latex">Inline math: &lt;span class="s">$&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\varphi&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\dfrac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\sqrt&lt;/span>&lt;span class="m">5&lt;/span>&lt;span class="nb">}{&lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="nb">}&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">.&lt;/span>&lt;span class="m">6180339887&lt;/span>&lt;span class="nb">… &lt;/span>&lt;span class="s">$&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Inline math: $ \varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887… $&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -139,10 +277,9 @@
 &lt;/span>&lt;span class="lnt">3
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-latex" data-lang="latex">&lt;span class="line">&lt;span class="cl">Block math:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb">$$&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\varphi&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\cdots&lt;/span>&lt;span class="nb">} } } &lt;/span>&lt;span class="s">$$&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-latex" data-lang="latex">Block math:
+&lt;span class="sb">$$&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\varphi&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\cdots&lt;/span>&lt;span class="nb">} } } &lt;/span>&lt;span class="s">$$&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Block math:&lt;/p>
 &lt;p>$$ \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } } $$&lt;/p></description></item><item><title>MathJax support</title><link>https://srivendare.github.io/post/test-mathjax/</link><pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate><author>Hugo Authors</author><guid>https://srivendare.github.io/post/test-mathjax/</guid><description>
@@ -156,8 +293,8 @@
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-latex" data-lang="latex">&lt;span class="line">&lt;span class="cl">Inline math: &lt;span class="s">$&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\varphi&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\dfrac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\sqrt&lt;/span>&lt;span class="m">5&lt;/span>&lt;span class="nb">}{&lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="nb">}&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">.&lt;/span>&lt;span class="m">6180339887&lt;/span>&lt;span class="nb">… &lt;/span>&lt;span class="s">$&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-latex" data-lang="latex">Inline math: &lt;span class="s">$&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\varphi&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\dfrac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\sqrt&lt;/span>&lt;span class="m">5&lt;/span>&lt;span class="nb">}{&lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="nb">}&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">.&lt;/span>&lt;span class="m">6180339887&lt;/span>&lt;span class="nb">… &lt;/span>&lt;span class="s">$&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Inline math: $ \varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887… $&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
@@ -167,10 +304,9 @@
 &lt;/span>&lt;span class="lnt">3
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-latex" data-lang="latex">&lt;span class="line">&lt;span class="cl">Block math:
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sb">$$&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\varphi&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\cdots&lt;/span>&lt;span class="nb">} } } &lt;/span>&lt;span class="s">$$&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-latex" data-lang="latex">Block math:
+&lt;span class="sb">$$&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="nv">\varphi&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb"> &lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\frac&lt;/span>&lt;span class="nb">{&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="nb">} {&lt;/span>&lt;span class="m">1&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="nv">\cdots&lt;/span>&lt;span class="nb">} } } &lt;/span>&lt;span class="s">$$&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Block math:&lt;/p>
 &lt;p>$$ \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } } $$&lt;/p></description></item><item><title>Markdown Syntax Guide</title><link>https://srivendare.github.io/post/markdown-syntax/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><author>Hugo Authors</author><guid>https://srivendare.github.io/post/markdown-syntax/</guid><description>
@@ -386,17 +522,17 @@ Code block with backticks
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;!doctype html&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span> &lt;span class="na">lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;en&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">charset&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;utf-8&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Example HTML5 Document&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Test&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="cp">&amp;lt;!doctype html&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span> &lt;span class="na">lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;en&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">charset&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;utf-8&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Example HTML5 Document&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Test&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h4 id="code-block-indented-with-four-spaces">
 &lt;a href="#code-block-indented-with-four-spaces" class="anchor">
@@ -443,16 +579,16 @@ Code block with Hugo&amp;rsquo;s internal highlight shortcode
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;!doctype html&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span> &lt;span class="na">lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;en&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">charset&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;utf-8&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Example HTML5 Document&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Test&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="cp">&amp;lt;!doctype html&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span> &lt;span class="na">lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;en&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">charset&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;utf-8&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Example HTML5 Document&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Test&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>
 &lt;h2 id="list-types">
@@ -535,14 +671,14 @@ Other Elements — abbr, sub, sup, kbd, mark
 &lt;p>X&lt;sup>n&lt;/sup> + Y&lt;sup>n&lt;/sup> = Z&lt;sup>n&lt;/sup>&lt;/p>
 &lt;p>Press &lt;kbd>&lt;kbd>CTRL&lt;/kbd>+&lt;kbd>ALT&lt;/kbd>+&lt;kbd>Delete&lt;/kbd>&lt;/kbd> to end the session.&lt;/p>
 &lt;p>Most &lt;mark>salamanders&lt;/mark> are nocturnal, and hunt for insects, worms, and other small creatures.&lt;/p>
-&lt;div class="footnotes" role="doc-endnotes">
+&lt;section class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1">
+&lt;li id="fn:1" role="doc-endnote">
 &lt;p>The above quote is excerpted from Rob Pike&amp;rsquo;s &lt;a href="https://www.youtube.com/watch?v=PAAkCSZUG1c">talk&lt;/a> during Gopherfest, November 18, 2015.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></description></item><item><title>Example Lazy Load Image</title><link>https://srivendare.github.io/post/example-lazy-load-image/</link><pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate><author>Hugo Authors</author><guid>https://srivendare.github.io/post/example-lazy-load-image/</guid><description>
+&lt;/section></description></item><item><title>Example Lazy Load Image</title><link>https://srivendare.github.io/post/example-lazy-load-image/</link><pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate><author>Hugo Authors</author><guid>https://srivendare.github.io/post/example-lazy-load-image/</guid><description>
 &lt;h2 id="nya-nya-nyan-meow-meow-mama">
 &lt;a href="#nya-nya-nyan-meow-meow-mama" class="anchor">
 &lt;svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
@@ -671,8 +807,8 @@ Mane refeci capiebant unda mulcebat
 &lt;/span>&lt;span class="lnt">3
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">.emoji {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">.emoji {
+font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
+}&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div></description></item></channel></rss>
