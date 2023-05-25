@@ -21,7 +21,7 @@
 <meta property="og:article:author" content="Rui">
 <meta property="article:author" content="Rui">
 <meta name=author content="Rui">
-<script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"Time Series Cheatsheet","author":{"@type":"Person","name":"Hugo Tania"},"datePublished":"2022-02-19","description":"","wordCount":88,"mainEntityOfPage":"True","dateModified":"2022-02-19","publisher":{"@type":"Organization","name":"Hugo Tania","logo":{"@type":"imageObject","url":"https:\/\/srivendare.github.io\/favicon.ico"}}}</script>
+<script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"Time Series Cheatsheet","author":{"@type":"Person","name":"Hugo Tania"},"datePublished":"2022-02-19","description":"","wordCount":527,"mainEntityOfPage":"True","dateModified":"2022-02-19","publisher":{"@type":"Organization","name":"Hugo Tania","logo":{"@type":"imageObject","url":"https:\/\/srivendare.github.io\/favicon.ico"}}}</script>
 <link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=stylesheet href=/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css>
 </head>
@@ -56,7 +56,7 @@ Sanggiya
 <div class=post-meta>
 <div>
 By Rui | <time>February 19, 2022</time>
-| 1 minutes
+| 3 minutes
 </div>
 <div class=tags>
 </div>
@@ -69,6 +69,257 @@ By Rui | <time>February 19, 2022</time>
 <p>This article aims to provide some pre-fabricated functions for time series analysis. After a dedication in Time Series field for past few months, I found it is good for getting some structual knowledge recorded.</p>
 <p>Through extensive projects and refinement, I have crafted a collection of functions that aim to streamline the process of analyzing temporal patterns, identifying trends, and extracting meaningful insights from time series datasets.</p>
 <p>In real work, I use these function to deliver fast results, although the basic notion can be easily forget sometimes : )</p>
+<p>Basic required libraries:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=c1># For data manipulation</span>
+<span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span>
+<span class=kn>import</span> <span class=nn>pandas</span> <span class=k>as</span> <span class=nn>pd</span>
+
+<span class=c1># To fetch financial data</span>
+<span class=kn>import</span> <span class=nn>yfinance</span> <span class=k>as</span> <span class=nn>yf</span>
+
+<span class=c1># For visualisation</span>
+<span class=kn>import</span> <span class=nn>matplotlib.pyplot</span> <span class=k>as</span> <span class=nn>plt</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Plotting Moving Avg.</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>plotMovingAvg</span><span class=p>(</span><span class=n>series</span><span class=p>,</span> <span class=n>window</span><span class=p>,</span> <span class=n>scale</span> <span class=o>=</span> <span class=mf>1.96</span><span class=p>,</span> <span class=n>plot_intervals</span> <span class=o>=</span><span class=kc>False</span><span class=p>,</span> <span class=n>anomalies</span> <span class=o>=</span> <span class=kc>False</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>        series - time indexed dataframe 
+</span><span class=s2>        window - rolling window size (days)
+</span><span class=s2>
+</span><span class=s2>    &#34;&#34;&#34;</span>
+    <span class=c1># by_day_stage = series</span>
+    <span class=c1># by_day_stage[&#39;timestamp&#39;] = series.index</span>
+    <span class=c1># by_day_stage[&#39;date&#39;] = series.apply(lambda x:str(x[&#39;timestamp&#39;]).split()[0], axis=1)</span>
+    <span class=c1># by_day = by_day_stage.groupby(by=&#39;date&#39;).agg({&#39;open&#39;: &#39;mean&#39;})</span>
+    <span class=n>rolling_mean</span> <span class=o>=</span> <span class=n>series</span><span class=o>.</span><span class=n>rolling</span><span class=p>(</span><span class=n>window</span><span class=o>=</span><span class=n>window</span><span class=p>)</span><span class=o>.</span><span class=n>mean</span><span class=p>()</span>
+    
+    <span class=n>fig</span><span class=p>,</span> <span class=n>ax</span> <span class=o>=</span> <span class=n>plt</span><span class=o>.</span><span class=n>subplots</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>16</span><span class=p>,</span><span class=mi>9</span><span class=p>))</span>
+    <span class=n>ax</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>series</span><span class=p>[</span><span class=n>window</span><span class=p>:],</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;Actual values&#34;</span><span class=p>)</span>
+    <span class=n>ax</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>rolling_mean</span><span class=p>,</span> <span class=n>label</span> <span class=o>=</span> <span class=s1>&#39;MA&#39;</span><span class=p>)</span>
+    <span class=n>ax</span><span class=o>.</span><span class=n>set_title</span><span class=p>(</span><span class=s2>&#34;Moving average</span><span class=se>\n</span><span class=s2> window size = </span><span class=si>{}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>window</span><span class=p>))</span>
+    
+
+    <span class=c1># plot intervals</span>
+    <span class=k>if</span> <span class=n>plot_intervals</span><span class=p>:</span>
+        <span class=n>mae</span> <span class=o>=</span> <span class=n>mean_absolute_error</span><span class=p>(</span><span class=n>series</span><span class=p>[</span><span class=n>window</span><span class=p>:],</span> <span class=n>rolling_mean</span><span class=p>[</span><span class=n>window</span><span class=p>:])</span>
+        <span class=n>deviation</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>std</span><span class=p>(</span><span class=n>series</span><span class=p>[</span><span class=n>window</span><span class=p>:]</span> <span class=o>-</span> <span class=n>rolling_mean</span><span class=p>[</span><span class=n>window</span><span class=p>:])</span>
+        <span class=n>lower_bond</span> <span class=o>=</span> <span class=n>rolling_mean</span> <span class=o>-</span> <span class=p>(</span><span class=n>mae</span> <span class=o>+</span> <span class=n>scale</span> <span class=o>*</span> <span class=n>deviation</span><span class=p>)</span>
+        <span class=n>upper_bond</span> <span class=o>=</span> <span class=n>rolling_mean</span> <span class=o>+</span> <span class=p>(</span><span class=n>mae</span> <span class=o>+</span> <span class=n>scale</span> <span class=o>*</span> <span class=n>deviation</span><span class=p>)</span>
+        <span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>upper_bond</span><span class=p>,</span> <span class=s2>&#34;r--&#34;</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;Upper Bond / Lower Bond&#34;</span><span class=p>)</span>
+        <span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>lower_bond</span><span class=p>,</span> <span class=s2>&#34;r--&#34;</span><span class=p>)</span>
+
+        <span class=c1># plot abnormals</span>
+        <span class=c1># Having the intervals, find abnormal values</span>
+        <span class=k>if</span> <span class=n>anomalies</span><span class=p>:</span>
+            <span class=n>anomalies</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>(</span><span class=n>index</span><span class=o>=</span><span class=n>series</span><span class=o>.</span><span class=n>index</span><span class=p>,</span> <span class=n>columns</span><span class=o>=</span><span class=n>series</span><span class=o>.</span><span class=n>columns</span><span class=p>)</span>
+            <span class=n>anomalies</span><span class=p>[</span><span class=n>series</span><span class=o>&lt;</span><span class=n>lower_bond</span><span class=p>]</span> <span class=o>=</span> <span class=n>series</span><span class=p>[</span><span class=n>series</span><span class=o>&lt;</span><span class=n>lower_bond</span><span class=p>]</span>
+            <span class=n>anomalies</span><span class=p>[</span><span class=n>series</span><span class=o>&gt;</span><span class=n>upper_bond</span><span class=p>]</span> <span class=o>=</span> <span class=n>series</span><span class=p>[</span><span class=n>series</span><span class=o>&gt;</span><span class=n>upper_bond</span><span class=p>]</span>
+            <span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>anomalies</span><span class=p>,</span> <span class=s2>&#34;ro&#34;</span><span class=p>,</span> <span class=n>markersize</span><span class=o>=</span><span class=mi>10</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Example Plotting</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=n>plotMovingAvg</span><span class=p>(</span><span class=n>test_df</span><span class=p>,</span> <span class=mi>480</span><span class=p>,</span> <span class=n>plot_intervals</span> <span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>anomalies</span> <span class=o>=</span> <span class=kc>True</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Export Results</p>
+<p>// image</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>plotModelResults</span><span class=p>(</span><span class=n>model</span><span class=p>,</span> <span class=n>X_train</span><span class=o>=</span><span class=n>X_train</span><span class=p>,</span> <span class=n>X_test</span><span class=o>=</span><span class=n>X_test</span><span class=p>,</span> <span class=n>plot_intervals</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span> <span class=n>plot_anomalies</span><span class=o>=</span><span class=kc>False</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>        Plots modelled vs fact values, prediction intervals and anomalies
+</span><span class=s2>    
+</span><span class=s2>    &#34;&#34;&#34;</span>
+    
+    <span class=n>prediction</span> <span class=o>=</span> <span class=n>model</span><span class=o>.</span><span class=n>predict</span><span class=p>(</span><span class=n>X_test</span>
+    <span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>15</span><span class=p>,</span> <span class=mi>7</span><span class=p>))</span>
+        <span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>prediction</span><span class=p>,</span> <span class=s2>&#34;g&#34;</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;prediction&#34;</span><span class=p>,</span> <span class=n>linewidth</span><span class=o>=</span><span class=mf>2.0</span><span class=p>)</span>
+        <span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>y_test</span><span class=o>.</span><span class=n>values</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;actual&#34;</span><span class=p>,</span> <span class=n>linewidth</span><span class=o>=</span><span class=mf>2.0</span><span class=p>)</span>
+
+        <span class=k>if</span> <span class=n>plot_intervals</span><span class=p>:</span>
+            <span class=n>cv</span> <span class=o>=</span> <span class=n>cross_val_score</span><span class=p>(</span><span class=n>model</span><span class=p>,</span> <span class=n>X_train</span><span class=p>,</span> <span class=n>y_train</span><span class=p>,</span> 
+                                        <span class=n>cv</span><span class=o>=</span><span class=n>tscv</span><span class=p>,</span> 
+                                        <span class=n>scoring</span><span class=o>=</span><span class=s2>&#34;neg_mean_absolute_error&#34;</span><span class=p>)</span>
+            <span class=n>mae</span> <span class=o>=</span> <span class=n>cv</span><span class=o>.</span><span class=n>mean</span><span class=p>()</span> <span class=o>*</span> <span class=p>(</span><span class=o>-</span><span class=mi>1</span><span class=p>)</span>
+            <span class=n>deviation</span> <span class=o>=</span> <span class=n>cv</span><span class=o>.</span><span class=n>std</span><span class=p>()</span>
+
+            <span class=n>scale</span> <span class=o>=</span> <span class=mf>1.96</span>
+            <span class=n>lower</span> <span class=o>=</span> <span class=n>prediction</span> <span class=o>-</span> <span class=p>(</span><span class=n>mae</span> <span class=o>+</span> <span class=n>scale</span> <span class=o>*</span> <span class=n>deviation</span><span class=p>)</span>
+            <span class=n>upper</span> <span class=o>=</span> <span class=n>prediction</span> <span class=o>+</span> <span class=p>(</span><span class=n>mae</span> <span class=o>+</span> <span class=n>scale</span> <span class=o>*</span> <span class=n>deviation</span><span class=p>)</span>
+
+            <span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>lower</span><span class=p>,</span> <span class=s2>&#34;r--&#34;</span><span class=p>,</span> <span class=n>label</span><span class=o>=</span><span class=s2>&#34;upper bond / lower bond&#34;</span><span class=p>,</span> <span class=n>alpha</span><span class=o>=</span><span class=mf>0.5</span><span class=p>)</span>
+            <span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>upper</span><span class=p>,</span> <span class=s2>&#34;r--&#34;</span><span class=p>,</span> <span class=n>alpha</span><span class=o>=</span><span class=mf>0.5</span><span class=p>)</span>
+
+            <span class=k>if</span> <span class=n>plot_anomalies</span><span class=p>:</span>
+                <span class=n>anomalies</span> <span class=o>=</span> <span class=n>np</span><span class=o>.</span><span class=n>array</span><span class=p>([</span><span class=n>np</span><span class=o>.</span><span class=n>NaN</span><span class=p>]</span><span class=o>*</span><span class=nb>len</span><span class=p>(</span><span class=n>y_test</span><span class=p>))</span>
+                <span class=n>anomalies</span><span class=p>[</span><span class=n>y_test</span><span class=o>&lt;</span><span class=n>lower</span><span class=p>]</span> <span class=o>=</span> <span class=n>y_test</span><span class=p>[</span><span class=n>y_test</span><span class=o>&lt;</span><span class=n>lower</span><span class=p>]</span>
+                <span class=n>anomalies</span><span class=p>[</span><span class=n>y_test</span><span class=o>&gt;</span><span class=n>upper</span><span class=p>]</span> <span class=o>=</span> <span class=n>y_test</span><span class=p>[</span><span class=n>y_test</span><span class=o>&gt;</span><span class=n>upper</span><span class=p>]</span>
+                <span class=n>plt</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>anomalies</span><span class=p>,</span> <span class=s2>&#34;o&#34;</span><span class=p>,</span> <span class=n>markersize</span><span class=o>=</span><span class=mi>10</span><span class=p>,</span> <span class=n>label</span> <span class=o>=</span> <span class=s2>&#34;Anomalies&#34;</span><span class=p>)</span>
+
+        <span class=n>error</span> <span class=o>=</span> <span class=n>mean_absolute_percentage_error</span><span class=p>(</span><span class=n>prediction</span><span class=p>,</span> <span class=n>y_test</span><span class=p>)</span>
+        <span class=n>plt</span><span class=o>.</span><span class=n>title</span><span class=p>(</span><span class=s2>&#34;Mean absolute percentage error </span><span class=si>{0:.2f}</span><span class=s2>%&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>error</span><span class=p>))</span>
+        <span class=n>plt</span><span class=o>.</span><span class=n>legend</span><span class=p>(</span><span class=n>loc</span><span class=o>=</span><span class=s2>&#34;best&#34;</span><span class=p>)</span>
+        <span class=n>plt</span><span class=o>.</span><span class=n>tight_layout</span><span class=p>()</span>
+        <span class=n>plt</span><span class=o>.</span><span class=n>grid</span><span class=p>(</span><span class=kc>True</span><span class=p>);</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=k>def</span> <span class=nf>plotCoefficients</span><span class=p>(</span><span class=n>model</span><span class=p>):</span>
+    <span class=s2>&#34;&#34;&#34;
+</span><span class=s2>        Plots sorted coefficient values of the model
+</span><span class=s2>    &#34;&#34;&#34;</span>
+    
+    <span class=n>coefs</span> <span class=o>=</span> <span class=n>pd</span><span class=o>.</span><span class=n>DataFrame</span><span class=p>(</span><span class=n>model</span><span class=o>.</span><span class=n>coef_</span><span class=p>,</span> <span class=n>X_train</span><span class=o>.</span><span class=n>columns</span><span class=p>)</span>
+    <span class=n>coefs</span><span class=o>.</span><span class=n>columns</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;coef&#34;</span><span class=p>]</span>
+    <span class=n>coefs</span><span class=p>[</span><span class=s2>&#34;abs&#34;</span><span class=p>]</span> <span class=o>=</span> <span class=n>coefs</span><span class=o>.</span><span class=n>coef</span><span class=o>.</span><span class=n>apply</span><span class=p>(</span><span class=n>np</span><span class=o>.</span><span class=n>abs</span><span class=p>)</span>
+    <span class=n>coefs</span> <span class=o>=</span> <span class=n>coefs</span><span class=o>.</span><span class=n>sort_values</span><span class=p>(</span><span class=n>by</span><span class=o>=</span><span class=s2>&#34;abs&#34;</span><span class=p>,</span> <span class=n>ascending</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span><span class=o>.</span><span class=n>drop</span><span class=p>([</span><span class=s2>&#34;abs&#34;</span><span class=p>],</span> <span class=n>axis</span><span class=o>=</span><span class=mi>1</span><span class=p>)</span>
+    
+    <span class=n>plt</span><span class=o>.</span><span class=n>figure</span><span class=p>(</span><span class=n>figsize</span><span class=o>=</span><span class=p>(</span><span class=mi>15</span><span class=p>,</span> <span class=mi>7</span><span class=p>))</span>
+    <span class=n>coefs</span><span class=o>.</span><span class=n>coef</span><span class=o>.</span><span class=n>plot</span><span class=p>(</span><span class=n>kind</span><span class=o>=</span><span class=s1>&#39;bar&#39;</span><span class=p>)</span>
+    <span class=n>plt</span><span class=o>.</span><span class=n>grid</span><span class=p>(</span><span class=kc>True</span><span class=p>,</span> <span class=n>axis</span><span class=o>=</span><span class=s1>&#39;y&#39;</span><span class=p>)</span>
+    <span class=n>plt</span><span class=o>.</span><span class=n>hlines</span><span class=p>(</span><span class=n>y</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>xmin</span><span class=o>=</span><span class=mi>0</span><span class=p>,</span> <span class=n>xmax</span><span class=o>=</span><span class=nb>len</span><span class=p>(</span><span class=n>coefs</span><span class=p>),</span> <span class=n>linestyles</span><span class=o>=</span><span class=s1>&#39;dashed&#39;</span><span class=p>);</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>XGBoot Codes:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=kn>from</span> <span class=nn>xgboost</span> <span class=kn>import</span> <span class=n>XGBRegressor</span> 
+
+<span class=n>xgb</span> <span class=o>=</span> <span class=n>XGBRegressor</span><span class=p>()</span>
+<span class=n>xgb</span><span class=o>.</span><span class=n>fit</span><span class=p>(</span><span class=n>X_train_scaled</span><span class=p>,</span> <span class=n>y_train</span><span class=p>)</span>
+
+<span class=n>plotModelResults</span><span class=p>(</span><span class=n>xgb</span><span class=p>,</span> 
+                 <span class=n>X_train</span><span class=o>=</span><span class=n>X_train_scaled</span><span class=p>,</span> 
+                 <span class=n>X_test</span><span class=o>=</span><span class=n>X_test_scaled</span><span class=p>,</span> 
+                 <span class=n>plot_intervals</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>plot_anomalies</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>// image</p>
 </div>
 </div>
 <div class=container>

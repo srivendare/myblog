@@ -213,7 +213,241 @@
 &lt;p>Judging criteria of machine learning models is always an important concerns in real life projects. This artical aims to provide some basic info for opting varibles for improving and evaluating machine learning models&lt;/p></description></item><item><title>Time Series Cheatsheet</title><link>https://srivendare.github.io/post/time_series_cheatsheet/</link><pubDate>Sat, 19 Feb 2022 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/time_series_cheatsheet/</guid><description>
 &lt;p>This article aims to provide some pre-fabricated functions for time series analysis. After a dedication in Time Series field for past few months, I found it is good for getting some structual knowledge recorded.&lt;/p>
 &lt;p>Through extensive projects and refinement, I have crafted a collection of functions that aim to streamline the process of analyzing temporal patterns, identifying trends, and extracting meaningful insights from time series datasets.&lt;/p>
-&lt;p>In real work, I use these function to deliver fast results, although the basic notion can be easily forget sometimes : )&lt;/p></description></item><item><title>Extracting Knowledge from Unstructual data</title><link>https://srivendare.github.io/post/extracting_info_from_struactual_data_source/</link><pubDate>Tue, 02 Nov 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/extracting_info_from_struactual_data_source/</guid><description/></item><item><title>Basic NLP of Entity Extraction</title><link>https://srivendare.github.io/post/entitiy_extraction/</link><pubDate>Tue, 05 Oct 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/entitiy_extraction/</guid><description>
+&lt;p>In real work, I use these function to deliver fast results, although the basic notion can be easily forget sometimes : )&lt;/p>
+&lt;p>Basic required libraries:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="c1"># For data manipulation&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">np&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">pandas&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">pd&lt;/span>
+&lt;span class="c1"># To fetch financial data&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">yfinance&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">yf&lt;/span>
+&lt;span class="c1"># For visualisation&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">matplotlib.pyplot&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">plt&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Plotting Moving Avg.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">plotMovingAvg&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">series&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">window&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">scale&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">1.96&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">plot_intervals&lt;/span> &lt;span class="o">=&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">anomalies&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">False&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;span class="s2"> series - time indexed dataframe
+&lt;/span>&lt;span class="s2"> window - rolling window size (days)
+&lt;/span>&lt;span class="s2">
+&lt;/span>&lt;span class="s2"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;span class="c1"># by_day_stage = series&lt;/span>
+&lt;span class="c1"># by_day_stage[&amp;#39;timestamp&amp;#39;] = series.index&lt;/span>
+&lt;span class="c1"># by_day_stage[&amp;#39;date&amp;#39;] = series.apply(lambda x:str(x[&amp;#39;timestamp&amp;#39;]).split()[0], axis=1)&lt;/span>
+&lt;span class="c1"># by_day = by_day_stage.groupby(by=&amp;#39;date&amp;#39;).agg({&amp;#39;open&amp;#39;: &amp;#39;mean&amp;#39;})&lt;/span>
+&lt;span class="n">rolling_mean&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">series&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rolling&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">window&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">window&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mean&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="n">fig&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ax&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">subplots&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">figsize&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">16&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">9&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="n">ax&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">series&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">window&lt;/span>&lt;span class="p">:],&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Actual values&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">ax&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">rolling_mean&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;MA&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">ax&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set_title&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Moving average&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2"> window size = &lt;/span>&lt;span class="si">{}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">window&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="c1"># plot intervals&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="n">plot_intervals&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">mae&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">mean_absolute_error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">series&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">window&lt;/span>&lt;span class="p">:],&lt;/span> &lt;span class="n">rolling_mean&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">window&lt;/span>&lt;span class="p">:])&lt;/span>
+&lt;span class="n">deviation&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">std&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">series&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">window&lt;/span>&lt;span class="p">:]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">rolling_mean&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">window&lt;/span>&lt;span class="p">:])&lt;/span>
+&lt;span class="n">lower_bond&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">rolling_mean&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">mae&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">scale&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">deviation&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">upper_bond&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">rolling_mean&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">mae&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">scale&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">deviation&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">upper_bond&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;r--&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Upper Bond / Lower Bond&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">lower_bond&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;r--&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="c1"># plot abnormals&lt;/span>
+&lt;span class="c1"># Having the intervals, find abnormal values&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="n">anomalies&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">anomalies&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DataFrame&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">index&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">series&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">index&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">columns&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">series&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">columns&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">anomalies&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">series&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">lower_bond&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">series&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">series&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">lower_bond&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">anomalies&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">series&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">upper_bond&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">series&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">series&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">upper_bond&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">anomalies&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;ro&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">markersize&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Example Plotting&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="n">plotMovingAvg&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">test_df&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">480&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">plot_intervals&lt;/span> &lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">anomalies&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Export Results&lt;/p>
+&lt;p>// image&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">plotModelResults&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">X_train&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">X_train&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">X_test&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">X_test&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">plot_intervals&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">plot_anomalies&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;span class="s2"> Plots modelled vs fact values, prediction intervals and anomalies
+&lt;/span>&lt;span class="s2">
+&lt;/span>&lt;span class="s2"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;span class="n">prediction&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">predict&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X_test&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">figure&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">figsize&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">15&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">prediction&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;g&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;prediction&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linewidth&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">2.0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">y_test&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">values&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;actual&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">linewidth&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">2.0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="n">plot_intervals&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">cv&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cross_val_score&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">X_train&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y_train&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="n">cv&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">tscv&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="n">scoring&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;neg_mean_absolute_error&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">mae&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mean&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">deviation&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">std&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="n">scale&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mf">1.96&lt;/span>
+&lt;span class="n">lower&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">prediction&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">mae&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">scale&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">deviation&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">upper&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">prediction&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">mae&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">scale&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">deviation&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">lower&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;r--&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;upper bond / lower bond&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.5&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">upper&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;r--&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.5&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="n">plot_anomalies&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">anomalies&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">array&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">NaN&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">y_test&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="n">anomalies&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">y_test&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">lower&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">y_test&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">y_test&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">lower&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">anomalies&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">y_test&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">upper&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">y_test&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">y_test&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">upper&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">anomalies&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;o&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">markersize&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;Anomalies&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">error&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">mean_absolute_percentage_error&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">prediction&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y_test&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Mean absolute percentage error &lt;/span>&lt;span class="si">{0:.2f}&lt;/span>&lt;span class="s2">%&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">error&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">legend&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">loc&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;best&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tight_layout&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">grid&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="k">def&lt;/span> &lt;span class="nf">plotCoefficients&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;span class="s2"> Plots sorted coefficient values of the model
+&lt;/span>&lt;span class="s2"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;span class="n">coefs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">DataFrame&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">coef_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">X_train&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">columns&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">coefs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">columns&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;coef&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">coefs&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;abs&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">coefs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">coef&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">apply&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">abs&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">coefs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">coefs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sort_values&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">by&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;abs&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ascending&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">drop&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="s2">&amp;#34;abs&amp;#34;&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">axis&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">figure&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">figsize&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">15&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">7&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="n">coefs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">coef&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">plot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">kind&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;bar&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">grid&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">axis&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;y&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">hlines&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">y&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">xmin&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">xmax&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">coefs&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">linestyles&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;dashed&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>XGBoot Codes:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="kn">from&lt;/span> &lt;span class="nn">xgboost&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">XGBRegressor&lt;/span>
+&lt;span class="n">xgb&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">XGBRegressor&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="n">xgb&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">fit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">X_train_scaled&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">y_train&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">plotModelResults&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">xgb&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="n">X_train&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">X_train_scaled&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="n">X_test&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">X_test_scaled&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="n">plot_intervals&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">plot_anomalies&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>// image&lt;/p></description></item><item><title>Extracting Knowledge from Unstructual data</title><link>https://srivendare.github.io/post/extracting_info_from_struactual_data_source/</link><pubDate>Tue, 02 Nov 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/extracting_info_from_struactual_data_source/</guid><description/></item><item><title>Basic NLP of Entity Extraction</title><link>https://srivendare.github.io/post/entitiy_extraction/</link><pubDate>Tue, 05 Oct 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/entitiy_extraction/</guid><description>
 &lt;p>In this article, I tried out Cohere&amp;rsquo;s generative models to extract entities from random texts. It involves employing structured generation, wherein I provided multiple examples within the prompt to enhance the model&amp;rsquo;s ability to generate accurate entity extractions.&lt;/p></description></item><item><title>Using Plotly Charts in Flaks</title><link>https://srivendare.github.io/post/diary_1/</link><pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/diary_1/</guid><description>
 &lt;p>This ariticle aims to give an idea about how to use plot.ly in Flask App.&lt;/p>
 &lt;p>On the route, pass json to HTML&lt;/p>
