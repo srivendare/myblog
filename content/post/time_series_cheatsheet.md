@@ -89,9 +89,7 @@ plotMovingAvg(test_df, 480, plot_intervals =True, anomalies = True)
 
 Export Results
 
-// image
-
-
+![4853226a-6cef-43b3-a5aa-d4543b6b9400](./img/4853226a-6cef-43b3-a5aa-d4543b6b9400.png)
 
 
 
@@ -136,6 +134,10 @@ def plotModelResults(model, X_train=X_train, X_test=X_test, plot_intervals=False
 
 
 
+![__results___118_0](./img/__results___118_0.png)
+
+
+
 ```python
 def plotCoefficients(model):
     """
@@ -156,11 +158,13 @@ def plotCoefficients(model):
 
 
 
+![__results___118_1](./img/__results___118_1.png)
+
+
+
 
 
 XGBoot Codes:
-
-
 
 ```python
 from xgboost import XGBRegressor 
@@ -176,4 +180,4 @@ plotModelResults(xgb,
 
 
 
-// image
+![__results___118_0](./img/__results___118_0.png)
