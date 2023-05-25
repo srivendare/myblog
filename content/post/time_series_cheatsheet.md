@@ -87,7 +87,9 @@ plotMovingAvg(test_df, 480, plot_intervals =True, anomalies = True)
 
 
 
-Export Results![4853226a-6cef-43b3-a5aa-d4543b6b9400](/Users/ruishang/Desktop/coffee/srivendare.github.io/content/post/img/4853226a-6cef-43b3-a5aa-d4543b6b9400.png)
+Export Results
+
+// image
 
 
 
@@ -174,4 +176,4 @@ plotModelResults(xgb,
 
 
 
-![XGBoost_res](/Users/ruishang/Desktop/coffee/srivendare.github.io/content/post/img/XGBoost_res.png)
+// image
