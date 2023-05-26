@@ -21,7 +21,7 @@
 <meta property="og:article:author" content="Rui">
 <meta property="article:author" content="Rui">
 <meta name=author content="Rui">
-<script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"Organizing Geospatial Data case study on China Eastern Railway","author":{"@type":"Person","name":"Hugo Tania"},"datePublished":"2023-05-16","description":"","wordCount":0,"mainEntityOfPage":"True","dateModified":"2023-05-16","publisher":{"@type":"Organization","name":"Hugo Tania","logo":{"@type":"imageObject","url":"https:\/\/srivendare.github.io\/favicon.ico"}}}</script>
+<script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"Organizing Geospatial Data case study on China Eastern Railway","author":{"@type":"Person","name":"Hugo Tania"},"datePublished":"2023-05-16","description":"","wordCount":273,"mainEntityOfPage":"True","dateModified":"2023-05-16","publisher":{"@type":"Organization","name":"Hugo Tania","logo":{"@type":"imageObject","url":"https:\/\/srivendare.github.io\/favicon.ico"}}}</script>
 <link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
 <link rel=stylesheet href=/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css>
 </head>
@@ -56,7 +56,7 @@ Sanggiya
 <div class=post-meta>
 <div>
 By Rui | <time>May 16, 2023</time>
-| 0 minutes
+| 2 minutes
 </div>
 <div class=tags>
 </div>
@@ -66,6 +66,224 @@ By Rui | <time>May 16, 2023</time>
 </header>
 </article>
 <div class=article-post>
+<p>This article is about some random outcomes for organizing info in a Multi Language Maps.</p>
+<p>The Original Map Image is in both Russian and Traditional Chinese:</p>
+<p><img loading=lazy src=https://pic.baike.soso.com/ugc/baikepic2/16500/cut-20220107211128-1527755848_jpg_938_625_129642.jpg/1284 alt=img></p>
+<p>After OCR through free version web tools:</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>English Name</th>
+<th>Chinese Name</th>
+<th>Russian Name</th>
+<th>Longitude</th>
+<th>Latitude</th>
+<th>Country Belonged To</th>
+<th>Year of Train Station Built</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Changchun</td>
+<td>长春</td>
+<td>Чанчунь</td>
+<td>125.323544</td>
+<td>43.817071</td>
+<td>China</td>
+<td>1898</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Shenyang</td>
+<td>沈阳</td>
+<td>Шэньян</td>
+<td>123.431472</td>
+<td>41.805698</td>
+<td>China</td>
+<td>189</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Tianjin</td>
+<td>天津</td>
+<td>Тяньцзинь</td>
+<td>117.199500</td>
+<td>39.085097</td>
+<td>China</td>
+<td>1888</td>
+</tr>
+</tbody>
+</table>
+<p>After Cleaning to Json Format:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=p>[</span>
+  <span class=p>{</span>
+    <span class=s2>&#34;_id&#34;</span><span class=p>:</span> <span class=mi>13</span><span class=p>,</span>
+    <span class=s2>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;长春&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;location&#34;</span><span class=p>:</span> <span class=p>{</span>
+      <span class=s2>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;Point&#34;</span><span class=p>,</span>
+      <span class=s2>&#34;coordinates&#34;</span><span class=p>:</span> <span class=p>[</span>
+        <span class=mf>125.323544</span><span class=p>,</span>
+        <span class=mf>43.817071</span>
+      <span class=p>]</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+  <span class=p>{</span>
+    <span class=s2>&#34;_id&#34;</span><span class=p>:</span> <span class=mi>14</span><span class=p>,</span>
+    <span class=s2>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;沈阳&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;location&#34;</span><span class=p>:</span> <span class=p>{</span>
+      <span class=s2>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;Point&#34;</span><span class=p>,</span>
+      <span class=s2>&#34;coordinates&#34;</span><span class=p>:</span> <span class=p>[</span>
+        <span class=mf>123.431472</span><span class=p>,</span>
+        <span class=mf>41.805698</span>
+      <span class=p>]</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+  <span class=p>{</span>
+    <span class=s2>&#34;_id&#34;</span><span class=p>:</span> <span class=mi>15</span><span class=p>,</span>
+    <span class=s2>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;天津&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;location&#34;</span><span class=p>:</span> <span class=p>{</span>
+      <span class=s2>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;Point&#34;</span><span class=p>,</span>
+      <span class=s2>&#34;coordinates&#34;</span><span class=p>:</span> <span class=p>[</span>
+        <span class=mf>117.1995</span><span class=p>,</span>
+        <span class=mf>39.085097</span>
+      <span class=p>]</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+  <span class=p>{</span>
+    <span class=s2>&#34;_id&#34;</span><span class=p>:</span> <span class=mi>16</span><span class=p>,</span>
+    <span class=s2>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;北京&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;location&#34;</span><span class=p>:</span> <span class=p>{</span>
+      <span class=s2>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;Point&#34;</span><span class=p>,</span>
+      <span class=s2>&#34;coordinates&#34;</span><span class=p>:</span> <span class=p>[</span>
+        <span class=mf>116.407396</span><span class=p>,</span>
+        <span class=mf>39.9042</span>
+      <span class=p>]</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+  <span class=p>{</span>
+    <span class=s2>&#34;_id&#34;</span><span class=p>:</span> <span class=mi>17</span><span class=p>,</span>
+    <span class=s2>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;鞍山&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;location&#34;</span><span class=p>:</span> <span class=p>{</span>
+      <span class=s2>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;Point&#34;</span><span class=p>,</span>
+      <span class=s2>&#34;coordinates&#34;</span><span class=p>:</span> <span class=p>[</span>
+        <span class=mf>122.994646</span><span class=p>,</span>
+        <span class=mf>41.108546</span>
+      <span class=p>]</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+  <span class=p>{</span>
+    <span class=s2>&#34;_id&#34;</span><span class=p>:</span> <span class=mi>18</span><span class=p>,</span>
+    <span class=s2>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;大连&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;location&#34;</span><span class=p>:</span> <span class=p>{</span>
+      <span class=s2>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;Point&#34;</span><span class=p>,</span>
+      <span class=s2>&#34;coordinates&#34;</span><span class=p>:</span> <span class=p>[</span>
+        <span class=mf>121.614682</span><span class=p>,</span>
+        <span class=mf>38.913689</span>
+      <span class=p>]</span>
+    <span class=p>}</span>
+  <span class=p>},</span>
+  <span class=p>{</span>
+    <span class=s2>&#34;_id&#34;</span><span class=p>:</span> <span class=mi>19</span><span class=p>,</span>
+    <span class=s2>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;元山&#34;</span><span class=p>,</span>
+    <span class=s2>&#34;location&#34;</span><span class=p>:</span> <span class=p>{</span>
+      <span class=s2>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;Point&#34;</span><span class=p>,</span>
+      <span class=s2>&#34;coordinates&#34;</span><span class=p>:</span> <span class=p>[</span>
+        <span class=mf>125.754249</span><span class=p>,</span>
+        <span class=mf>39.160949</span>
+      <span class=p>]</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>]</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
 </div>
 </div>
 <div class=container>

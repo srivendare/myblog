@@ -1,4 +1,224 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sanggiya</title><link>https://srivendare.github.io/</link><description>Recent content on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 23 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Rebuild workflow of my personal blog</title><link>https://srivendare.github.io/post/rebuild_myblog/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/rebuild_myblog/</guid><description/></item><item><title>Organizing Geospatial Data case study on China Eastern Railway</title><link>https://srivendare.github.io/post/china_eastern_railway/</link><pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/china_eastern_railway/</guid><description/></item><item><title>Golang Cheatsheet</title><link>https://srivendare.github.io/post/golang_cheatsheet/</link><pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/golang_cheatsheet/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sanggiya</title><link>https://srivendare.github.io/</link><description>Recent content on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 23 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Rebuild workflow of my personal blog</title><link>https://srivendare.github.io/post/rebuild_myblog/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/rebuild_myblog/</guid><description/></item><item><title>Organizing Geospatial Data case study on China Eastern Railway</title><link>https://srivendare.github.io/post/china_eastern_railway/</link><pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/china_eastern_railway/</guid><description>
+&lt;p>This article is about some random outcomes for organizing info in a Multi Language Maps.&lt;/p>
+&lt;p>The Original Map Image is in both Russian and Traditional Chinese:&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://pic.baike.soso.com/ugc/baikepic2/16500/cut-20220107211128-1527755848_jpg_938_625_129642.jpg/1284"
+alt="img"
+/>&lt;/p>
+&lt;p>After OCR through free version web tools:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>ID&lt;/th>
+&lt;th>English Name&lt;/th>
+&lt;th>Chinese Name&lt;/th>
+&lt;th>Russian Name&lt;/th>
+&lt;th>Longitude&lt;/th>
+&lt;th>Latitude&lt;/th>
+&lt;th>Country Belonged To&lt;/th>
+&lt;th>Year of Train Station Built&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>1&lt;/td>
+&lt;td>Changchun&lt;/td>
+&lt;td>长春&lt;/td>
+&lt;td>Чанчунь&lt;/td>
+&lt;td>125.323544&lt;/td>
+&lt;td>43.817071&lt;/td>
+&lt;td>China&lt;/td>
+&lt;td>1898&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>2&lt;/td>
+&lt;td>Shenyang&lt;/td>
+&lt;td>沈阳&lt;/td>
+&lt;td>Шэньян&lt;/td>
+&lt;td>123.431472&lt;/td>
+&lt;td>41.805698&lt;/td>
+&lt;td>China&lt;/td>
+&lt;td>189&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3&lt;/td>
+&lt;td>Tianjin&lt;/td>
+&lt;td>天津&lt;/td>
+&lt;td>Тяньцзинь&lt;/td>
+&lt;td>117.199500&lt;/td>
+&lt;td>39.085097&lt;/td>
+&lt;td>China&lt;/td>
+&lt;td>1888&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>After Cleaning to Json Format:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;span class="lnt">70
+&lt;/span>&lt;span class="lnt">71
+&lt;/span>&lt;span class="lnt">72
+&lt;/span>&lt;span class="lnt">73
+&lt;/span>&lt;span class="lnt">74
+&lt;/span>&lt;span class="lnt">75
+&lt;/span>&lt;span class="lnt">76
+&lt;/span>&lt;span class="lnt">77
+&lt;/span>&lt;span class="lnt">78
+&lt;/span>&lt;span class="lnt">79
+&lt;/span>&lt;span class="lnt">80
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="p">[&lt;/span>
+&lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;_id&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">13&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;title&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;长春&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;location&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Point&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;coordinates&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="mf">125.323544&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="mf">43.817071&lt;/span>
+&lt;span class="p">]&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;_id&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">14&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;title&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;沈阳&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;location&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Point&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;coordinates&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="mf">123.431472&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="mf">41.805698&lt;/span>
+&lt;span class="p">]&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;_id&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">15&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;title&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;天津&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;location&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Point&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;coordinates&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="mf">117.1995&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="mf">39.085097&lt;/span>
+&lt;span class="p">]&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;_id&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">16&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;title&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;北京&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;location&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Point&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;coordinates&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="mf">116.407396&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="mf">39.9042&lt;/span>
+&lt;span class="p">]&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;_id&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">17&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;title&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;鞍山&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;location&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Point&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;coordinates&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="mf">122.994646&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="mf">41.108546&lt;/span>
+&lt;span class="p">]&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;_id&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">18&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;title&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;大连&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;location&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Point&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;coordinates&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="mf">121.614682&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="mf">38.913689&lt;/span>
+&lt;span class="p">]&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">},&lt;/span>
+&lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;_id&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">19&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;title&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;元山&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;location&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;span class="s2">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Point&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="s2">&amp;#34;coordinates&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;span class="mf">125.754249&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="mf">39.160949&lt;/span>
+&lt;span class="p">]&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">}&lt;/span>
+&lt;span class="p">]&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Golang Cheatsheet</title><link>https://srivendare.github.io/post/golang_cheatsheet/</link><pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/golang_cheatsheet/</guid><description>
 &lt;p>2022-03-06&lt;/p>
 &lt;p>Recently I need to maintain colleague&amp;rsquo;s web scrapers in Golang, here are some notes I took during self-learning, I will keep on updating this article&lt;/p>
 &lt;ol>
@@ -318,7 +538,10 @@
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>Export Results&lt;/p>
-&lt;p>// image&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://www.kaggleusercontent.com/kf/50985180/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..zWIu3Foz2bx7F5TZJvnBOw.KicB2tc55Yyj2ENgh8_xyBQu5e1NyyKNWFXFotqQi0s_imP2w3_fBkUy1EAV-Vzew329veiUgDPf2Aa30zp2eR_0Kphh48zLCybbHaxvNcYPqWGi4AIaXqjzUVL2qkm5NahS9wsPN83tWU_M0UphVCe_1rI4vGi__6_C_9jOaH94nKz5U0d9R95NPT-n6qu3e6P_7wAIgClnXJeoikfQInJaa8QkLnTIWNhspOW9FHTZSYYA0Sv1jAlNAohRlDIGNVoxrAvZSGorCYcB6loKjAwCSCf4mOF_dHK_zYw4wCFGJcSQJTlO6hnAz3Ys32gIoj01GPJ4wYEMHJ_Ymq3GGK94Mpj5lFD_MY4SqKb5YLBwHhVNW-Eag5dmE6MAVjOpw4w8lvIUe8tvKcAZog7r3Yz6c9ICFTWBqup2KYL8qOw1dlt4x8LaL0qzCQqoR1vgF0_L3rLixAW4QEOCDJ9qW7uF74eQ8ACGUUVle8ckXTsOk8F0vscNUoaSGJOolUj66y3xLo-IzV-uh-hNtILV4PxW-Dcp667OJtXEGFhabVmRfebE4L8-XIkL319hWpy1h7VDfzv0mg7k0WNLjZNXVloNmWsdGLAx06JqeFBj4p1cEDO7yRptfeNQUt_IVErbY9VvjH68AkfR185PpcFQDBZMsL1e1soFu1jl8O9O1ayGVnW1KrjYSCUzwauH54X0.kV9fJzFZfF6k_gHJ0usF6A/__results___files/__results___35_0.png"
+alt="img"
+/>&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -391,7 +614,11 @@
 &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">grid&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://www.kaggleusercontent.com/kf/50985180/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..zWIu3Foz2bx7F5TZJvnBOw.KicB2tc55Yyj2ENgh8_xyBQu5e1NyyKNWFXFotqQi0s_imP2w3_fBkUy1EAV-Vzew329veiUgDPf2Aa30zp2eR_0Kphh48zLCybbHaxvNcYPqWGi4AIaXqjzUVL2qkm5NahS9wsPN83tWU_M0UphVCe_1rI4vGi__6_C_9jOaH94nKz5U0d9R95NPT-n6qu3e6P_7wAIgClnXJeoikfQInJaa8QkLnTIWNhspOW9FHTZSYYA0Sv1jAlNAohRlDIGNVoxrAvZSGorCYcB6loKjAwCSCf4mOF_dHK_zYw4wCFGJcSQJTlO6hnAz3Ys32gIoj01GPJ4wYEMHJ_Ymq3GGK94Mpj5lFD_MY4SqKb5YLBwHhVNW-Eag5dmE6MAVjOpw4w8lvIUe8tvKcAZog7r3Yz6c9ICFTWBqup2KYL8qOw1dlt4x8LaL0qzCQqoR1vgF0_L3rLixAW4QEOCDJ9qW7uF74eQ8ACGUUVle8ckXTsOk8F0vscNUoaSGJOolUj66y3xLo-IzV-uh-hNtILV4PxW-Dcp667OJtXEGFhabVmRfebE4L8-XIkL319hWpy1h7VDfzv0mg7k0WNLjZNXVloNmWsdGLAx06JqeFBj4p1cEDO7yRptfeNQUt_IVErbY9VvjH68AkfR185PpcFQDBZMsL1e1soFu1jl8O9O1ayGVnW1KrjYSCUzwauH54X0.kV9fJzFZfF6k_gHJ0usF6A/__results___files/__results___118_0.png"
+alt="img"
+/>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
 &lt;/span>&lt;span class="lnt"> 2
@@ -424,7 +651,11 @@
 &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">hlines&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">y&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">xmin&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">xmax&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">coefs&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">linestyles&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;dashed&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>XGBoot Codes:&lt;/p>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://www.kaggleusercontent.com/kf/50985180/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..zWIu3Foz2bx7F5TZJvnBOw.KicB2tc55Yyj2ENgh8_xyBQu5e1NyyKNWFXFotqQi0s_imP2w3_fBkUy1EAV-Vzew329veiUgDPf2Aa30zp2eR_0Kphh48zLCybbHaxvNcYPqWGi4AIaXqjzUVL2qkm5NahS9wsPN83tWU_M0UphVCe_1rI4vGi__6_C_9jOaH94nKz5U0d9R95NPT-n6qu3e6P_7wAIgClnXJeoikfQInJaa8QkLnTIWNhspOW9FHTZSYYA0Sv1jAlNAohRlDIGNVoxrAvZSGorCYcB6loKjAwCSCf4mOF_dHK_zYw4wCFGJcSQJTlO6hnAz3Ys32gIoj01GPJ4wYEMHJ_Ymq3GGK94Mpj5lFD_MY4SqKb5YLBwHhVNW-Eag5dmE6MAVjOpw4w8lvIUe8tvKcAZog7r3Yz6c9ICFTWBqup2KYL8qOw1dlt4x8LaL0qzCQqoR1vgF0_L3rLixAW4QEOCDJ9qW7uF74eQ8ACGUUVle8ckXTsOk8F0vscNUoaSGJOolUj66y3xLo-IzV-uh-hNtILV4PxW-Dcp667OJtXEGFhabVmRfebE4L8-XIkL319hWpy1h7VDfzv0mg7k0WNLjZNXVloNmWsdGLAx06JqeFBj4p1cEDO7yRptfeNQUt_IVErbY9VvjH68AkfR185PpcFQDBZMsL1e1soFu1jl8O9O1ayGVnW1KrjYSCUzwauH54X0.kV9fJzFZfF6k_gHJ0usF6A/__results___files/__results___118_1.png"
+alt="img"
+/>&lt;/p>
+&lt;p>XGBoot Codes:&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -447,7 +678,10 @@
 &lt;span class="n">plot_intervals&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">plot_anomalies&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>// image&lt;/p></description></item><item><title>Extracting Knowledge from Unstructual data</title><link>https://srivendare.github.io/post/extracting_info_from_struactual_data_source/</link><pubDate>Tue, 02 Nov 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/extracting_info_from_struactual_data_source/</guid><description/></item><item><title>Basic NLP of Entity Extraction</title><link>https://srivendare.github.io/post/entitiy_extraction/</link><pubDate>Tue, 05 Oct 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/entitiy_extraction/</guid><description>
+&lt;/div>&lt;p>&lt;img loading="lazy"
+src="https://www.kaggleusercontent.com/kf/50985180/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..zWIu3Foz2bx7F5TZJvnBOw.KicB2tc55Yyj2ENgh8_xyBQu5e1NyyKNWFXFotqQi0s_imP2w3_fBkUy1EAV-Vzew329veiUgDPf2Aa30zp2eR_0Kphh48zLCybbHaxvNcYPqWGi4AIaXqjzUVL2qkm5NahS9wsPN83tWU_M0UphVCe_1rI4vGi__6_C_9jOaH94nKz5U0d9R95NPT-n6qu3e6P_7wAIgClnXJeoikfQInJaa8QkLnTIWNhspOW9FHTZSYYA0Sv1jAlNAohRlDIGNVoxrAvZSGorCYcB6loKjAwCSCf4mOF_dHK_zYw4wCFGJcSQJTlO6hnAz3Ys32gIoj01GPJ4wYEMHJ_Ymq3GGK94Mpj5lFD_MY4SqKb5YLBwHhVNW-Eag5dmE6MAVjOpw4w8lvIUe8tvKcAZog7r3Yz6c9ICFTWBqup2KYL8qOw1dlt4x8LaL0qzCQqoR1vgF0_L3rLixAW4QEOCDJ9qW7uF74eQ8ACGUUVle8ckXTsOk8F0vscNUoaSGJOolUj66y3xLo-IzV-uh-hNtILV4PxW-Dcp667OJtXEGFhabVmRfebE4L8-XIkL319hWpy1h7VDfzv0mg7k0WNLjZNXVloNmWsdGLAx06JqeFBj4p1cEDO7yRptfeNQUt_IVErbY9VvjH68AkfR185PpcFQDBZMsL1e1soFu1jl8O9O1ayGVnW1KrjYSCUzwauH54X0.kV9fJzFZfF6k_gHJ0usF6A/__results___files/__results___146_0.png"
+alt="img"
+/>&lt;/p></description></item><item><title>Extracting Knowledge from Unstructual data</title><link>https://srivendare.github.io/post/extracting_info_from_struactual_data_source/</link><pubDate>Tue, 02 Nov 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/extracting_info_from_struactual_data_source/</guid><description/></item><item><title>Basic NLP of Entity Extraction</title><link>https://srivendare.github.io/post/entitiy_extraction/</link><pubDate>Tue, 05 Oct 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/entitiy_extraction/</guid><description>
 &lt;p>In this article, I tried out Cohere&amp;rsquo;s generative models to extract entities from random texts. It involves employing structured generation, wherein I provided multiple examples within the prompt to enhance the model&amp;rsquo;s ability to generate accurate entity extractions.&lt;/p></description></item><item><title>Using Plotly Charts in Flaks</title><link>https://srivendare.github.io/post/diary_1/</link><pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/diary_1/</guid><description>
 &lt;p>This ariticle aims to give an idea about how to use plot.ly in Flask App.&lt;/p>
 &lt;p>On the route, pass json to HTML&lt;/p>
