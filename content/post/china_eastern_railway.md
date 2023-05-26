@@ -16,7 +16,7 @@ This article is about some random outcomes for organizing info in a Multi Langua
 
 The Original Map Image is in both Russian and Traditional Chinese:
 
-![cer_map](./img/cer_map.jpg)
+![img](https://pic.baike.soso.com/ugc/baikepic2/16500/cut-20220107211128-1527755848_jpg_938_625_129642.jpg/1284)
 
 
 
