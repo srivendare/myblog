@@ -1,0 +1,690 @@
+<!doctype html><html lang=en-us>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=theme-color content="dark">
+<title>Basic Knowledge Graph in Neo4j | Sanggiya</title>
+<meta property="og:site_name" content="Hugo Tania is Amazing">
+<meta property="og:title" content="Basic Knowledge Graph in Neo4j | Sanggiya">
+<meta itemprop=name content="Basic Knowledge Graph in Neo4j | Sanggiya">
+<meta name=twitter:title content="Basic Knowledge Graph in Neo4j | Sanggiya">
+<meta name=application-name content="Basic Knowledge Graph in Neo4j | Sanggiya"><meta name=twitter:card content="summary">
+<meta name=description content="Hugo is Absurdly Fast!">
+<meta name=twitter:description content="Hugo is Absurdly Fast!">
+<meta itemprop=description content="Hugo is Absurdly Fast!">
+<meta property="og:description" content="Hugo is Absurdly Fast!">
+<meta property="og:type" content="article">
+<meta property="article:publisher" content="Hugo Tania">
+<meta property="og:article:published_time" content="2023-04-05T00:00:00Z">
+<meta property="article:published_time" content="2023-04-05T00:00:00Z">
+<meta property="og:article:author" content="Rui">
+<meta property="article:author" content="Rui">
+<meta name=author content="Rui">
+<script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"Basic Knowledge Graph in Neo4j","author":{"@type":"Person","name":"Hugo Tania"},"datePublished":"2023-04-05","description":"","wordCount":960,"mainEntityOfPage":"True","dateModified":"2023-04-05","publisher":{"@type":"Organization","name":"Hugo Tania","logo":{"@type":"imageObject","url":"https:\/\/srivendare.github.io\/favicon.ico"}}}</script>
+<link rel="shortcut icon" type=image/x-icon href=/favicon.ico>
+<link rel=stylesheet href=/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css>
+</head>
+<script>(function(){const a='ThemeColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='ThemeColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.userColorScheme='dark':document.documentElement.dataset.userColorScheme='light'})()</script>
+<body class=dark>
+<nav class=navbar>
+<div class=container>
+<div class=flex>
+<div>
+<a class=brand href=/>
+<span class=emoji>
+🥯
+</span>
+Sanggiya
+</a>
+</div>
+<div class=flex>
+<a href=/articles/>Tags</a>
+<button id=dark-mode-button><svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163.0 101.643 1.641 1.163 1.163.0 00-1.643-1.641zm-16.022 14.38a1.74 1.74.0 000 2.465 1.742 1.742.0 100-2.465zm13.968-2.147a2.904 2.904.0 01-4.108.0 2.902 2.902.0 010-4.107 2.902 2.902.0 014.108.0 2.902 2.902.0 010 4.107z" fill="#ffcc4d"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg><svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)" viewBox="0 0 36 36"><path fill="#ffd983" d="M16 2s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2V2zm18 14s2 0 2 2-2 2-2 2h-2s-2 0-2-2 2-2 2-2h2zM4 16s2 0 2 2-2 2-2 2H2s-2 0-2-2 2-2 2-2h2zm5.121-8.707s1.414 1.414.0 2.828-2.828.0-2.828.0L4.878 8.708s-1.414-1.414.0-2.829c1.415-1.414 2.829.0 2.829.0l1.414 1.414zm21 21s1.414 1.414.0 2.828-2.828.0-2.828.0l-1.414-1.414s-1.414-1.414.0-2.828 2.828.0 2.828.0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828.0.0-2.828.0-2.828l1.414-1.414s1.414-1.414 2.828.0.0 2.828.0 2.828l-1.414 1.414zM16 32s0-2 2-2 2 2 2 2v2s0 2-2 2-2-2-2-2v-2z"/><circle fill="#ffd983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)"/></svg>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<main>
+<div class=container>
+<article>
+<header class=article-header>
+<div class=thumb>
+<div>
+<h1>Basic Knowledge Graph in Neo4j</h1>
+<div class=post-meta>
+<div>
+By Rui | <time>April 05, 2023</time>
+| 5 minutes
+</div>
+<div class=tags>
+</div>
+</div>
+</div>
+</div>
+</header>
+</article>
+<div class=article-post>
+<p>This repo try extract data from json raw data and build Knowledge graph in Neo4j</p>
+<p>Raw Data Source:</p>
+<p><a href=https://github.com/liuhuanyong/QASystemOnMedicalKG/tree/master/data>https://github.com/liuhuanyong/QASystemOnMedicalKG/tree/master/data</a></p>
+<p>Codes:</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span><span class=lnt>200
+</span><span class=lnt>201
+</span><span class=lnt>202
+</span><span class=lnt>203
+</span><span class=lnt>204
+</span><span class=lnt>205
+</span><span class=lnt>206
+</span><span class=lnt>207
+</span><span class=lnt>208
+</span><span class=lnt>209
+</span><span class=lnt>210
+</span><span class=lnt>211
+</span><span class=lnt>212
+</span><span class=lnt>213
+</span><span class=lnt>214
+</span><span class=lnt>215
+</span><span class=lnt>216
+</span><span class=lnt>217
+</span><span class=lnt>218
+</span><span class=lnt>219
+</span><span class=lnt>220
+</span><span class=lnt>221
+</span><span class=lnt>222
+</span><span class=lnt>223
+</span><span class=lnt>224
+</span><span class=lnt>225
+</span><span class=lnt>226
+</span><span class=lnt>227
+</span><span class=lnt>228
+</span><span class=lnt>229
+</span><span class=lnt>230
+</span><span class=lnt>231
+</span><span class=lnt>232
+</span><span class=lnt>233
+</span><span class=lnt>234
+</span><span class=lnt>235
+</span><span class=lnt>236
+</span><span class=lnt>237
+</span><span class=lnt>238
+</span><span class=lnt>239
+</span><span class=lnt>240
+</span><span class=lnt>241
+</span><span class=lnt>242
+</span><span class=lnt>243
+</span><span class=lnt>244
+</span><span class=lnt>245
+</span><span class=lnt>246
+</span><span class=lnt>247
+</span><span class=lnt>248
+</span><span class=lnt>249
+</span><span class=lnt>250
+</span><span class=lnt>251
+</span><span class=lnt>252
+</span><span class=lnt>253
+</span><span class=lnt>254
+</span><span class=lnt>255
+</span><span class=lnt>256
+</span><span class=lnt>257
+</span><span class=lnt>258
+</span><span class=lnt>259
+</span><span class=lnt>260
+</span><span class=lnt>261
+</span><span class=lnt>262
+</span><span class=lnt>263
+</span><span class=lnt>264
+</span><span class=lnt>265
+</span><span class=lnt>266
+</span><span class=lnt>267
+</span><span class=lnt>268
+</span><span class=lnt>269
+</span><span class=lnt>270
+</span><span class=lnt>271
+</span><span class=lnt>272
+</span><span class=lnt>273
+</span><span class=lnt>274
+</span><span class=lnt>275
+</span><span class=lnt>276
+</span><span class=lnt>277
+</span><span class=lnt>278
+</span><span class=lnt>279
+</span><span class=lnt>280
+</span><span class=lnt>281
+</span><span class=lnt>282
+</span><span class=lnt>283
+</span><span class=lnt>284
+</span><span class=lnt>285
+</span><span class=lnt>286
+</span><span class=lnt>287
+</span><span class=lnt>288
+</span><span class=lnt>289
+</span><span class=lnt>290
+</span><span class=lnt>291
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=c1>#encoding:utf8</span>
+<span class=kn>import</span> <span class=nn>os</span>
+<span class=kn>import</span> <span class=nn>re</span>
+<span class=kn>import</span> <span class=nn>json</span>
+<span class=kn>import</span> <span class=nn>codecs</span>
+<span class=kn>import</span> <span class=nn>threading</span>
+<span class=kn>from</span> <span class=nn>py2neo</span> <span class=kn>import</span> <span class=n>Graph</span>
+<span class=kn>import</span> <span class=nn>pandas</span> <span class=k>as</span> <span class=nn>pd</span> 
+<span class=kn>import</span> <span class=nn>numpy</span> <span class=k>as</span> <span class=nn>np</span> 
+<span class=kn>from</span> <span class=nn>tqdm</span> <span class=kn>import</span> <span class=n>tqdm</span> 
+
+<span class=c1>### Get data Info</span>
+<span class=k>def</span> <span class=nf>print_data_info</span><span class=p>(</span><span class=n>data_path</span><span class=p>):</span>
+    <span class=n>triples</span> <span class=o>=</span> <span class=p>[]</span>
+    <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span>
+    <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>data_path</span><span class=p>,</span><span class=s1>&#39;r&#39;</span><span class=p>,</span><span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;utf8&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+        <span class=k>for</span> <span class=n>line</span> <span class=ow>in</span> <span class=n>f</span><span class=o>.</span><span class=n>readlines</span><span class=p>():</span>
+            <span class=n>data</span> <span class=o>=</span> <span class=n>json</span><span class=o>.</span><span class=n>loads</span><span class=p>(</span><span class=n>line</span><span class=p>)</span>
+            <span class=nb>print</span><span class=p>(</span><span class=n>json</span><span class=o>.</span><span class=n>dumps</span><span class=p>(</span><span class=n>data</span><span class=p>,</span> <span class=n>sort_keys</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span> <span class=n>indent</span><span class=o>=</span><span class=mi>4</span><span class=p>,</span> <span class=n>separators</span><span class=o>=</span><span class=p>(</span><span class=s1>&#39;, &#39;</span><span class=p>,</span> <span class=s1>&#39;: &#39;</span><span class=p>),</span><span class=n>ensure_ascii</span><span class=o>=</span><span class=kc>False</span><span class=p>))</span>
+            <span class=n>i</span> <span class=o>+=</span> <span class=mi>1</span>
+            <span class=k>if</span> <span class=n>i</span> <span class=o>&gt;=</span><span class=mi>5</span><span class=p>:</span>
+                <span class=k>break</span>
+    <span class=k>return</span> <span class=n>triples</span>
+
+<span class=c1>### Extraction Object</span>
+<span class=k>class</span> <span class=nc>MedicalExtractor</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+        <span class=nb>super</span><span class=p>(</span><span class=n>MedicalExtractor</span><span class=p>,</span> <span class=bp>self</span><span class=p>)</span><span class=o>.</span><span class=fm>__init__</span><span class=p>()</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>graph</span> <span class=o>=</span> <span class=n>Graph</span><span class=p>(</span>
+            <span class=n>host</span><span class=o>=</span><span class=s2>&#34;127.0.0.1&#34;</span><span class=p>,</span>
+            <span class=n>http_port</span><span class=o>=</span><span class=mi>7474</span><span class=p>,</span>
+            <span class=n>user</span><span class=o>=</span><span class=s2>&#34;neo4j&#34;</span><span class=p>,</span>
+            <span class=n>password</span><span class=o>=</span><span class=s2>&#34;123456&#34;</span><span class=p>)</span>
+
+        <span class=c1># 共8类节点</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>drugs</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 药品</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>recipes</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1>#菜谱</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>foods</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1>#　食物</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>checks</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 检查</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>departments</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1>#科室</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>producers</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1>#药企</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>diseases</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1>#疾病</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>symptoms</span> <span class=o>=</span> <span class=p>[]</span><span class=c1>#症状</span>
+
+        <span class=bp>self</span><span class=o>.</span><span class=n>disease_infos</span> <span class=o>=</span> <span class=p>[]</span><span class=c1>#疾病信息</span>
+
+        <span class=c1># 构建节点实体关系</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_department</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1>#　科室－科室关系</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_noteat</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 疾病－忌吃食物关系</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_doeat</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 疾病－宜吃食物关系</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_recommandeat</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 疾病－推荐吃食物关系</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_commonddrug</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 疾病－通用药品关系</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_recommanddrug</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 疾病－热门药品关系</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_check</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 疾病－检查关系</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_drug_producer</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 厂商－药物关系</span>
+
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_symptom</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1>#疾病症状关系</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_acompany</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1># 疾病并发关系</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>rels_category</span> <span class=o>=</span> <span class=p>[]</span> <span class=c1>#　疾病与科室之间的关系</span>
+        
+    <span class=k>def</span> <span class=nf>extract_triples</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>data_path</span><span class=p>):</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;从json文件中转换抽取三元组&#34;</span><span class=p>)</span>
+        <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>data_path</span><span class=p>,</span><span class=s1>&#39;r&#39;</span><span class=p>,</span><span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;utf8&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+            <span class=k>for</span> <span class=n>line</span> <span class=ow>in</span> <span class=n>tqdm</span><span class=p>(</span><span class=n>f</span><span class=o>.</span><span class=n>readlines</span><span class=p>(),</span><span class=n>ncols</span><span class=o>=</span><span class=mi>80</span><span class=p>):</span>
+                <span class=n>data_json</span> <span class=o>=</span> <span class=n>json</span><span class=o>.</span><span class=n>loads</span><span class=p>(</span><span class=n>line</span><span class=p>)</span>
+                <span class=n>disease_dict</span> <span class=o>=</span> <span class=p>{}</span>
+                <span class=n>disease</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;name&#39;</span><span class=p>]</span>
+                <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;name&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>disease</span>
+                <span class=bp>self</span><span class=o>.</span><span class=n>diseases</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>disease</span><span class=p>)</span>
+                <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;desc&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+                <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;prevent&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+                <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;cause&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+                <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;easy_get&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+                <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;cure_department&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+                <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;cure_way&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+                <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;cure_lasttime&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+                <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;symptom&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+                <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;cured_prob&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+
+                <span class=k>if</span> <span class=s1>&#39;symptom&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=bp>self</span><span class=o>.</span><span class=n>symptoms</span> <span class=o>+=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;symptom&#39;</span><span class=p>]</span>
+                    <span class=k>for</span> <span class=n>symptom</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;symptom&#39;</span><span class=p>]:</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>rels_symptom</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>disease</span><span class=p>,</span><span class=s1>&#39;has_symptom&#39;</span><span class=p>,</span> <span class=n>symptom</span><span class=p>])</span>
+
+                <span class=k>if</span> <span class=s1>&#39;acompany&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=k>for</span> <span class=n>acompany</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;acompany&#39;</span><span class=p>]:</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>rels_acompany</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>disease</span><span class=p>,</span><span class=s1>&#39;acompany_with&#39;</span><span class=p>,</span> <span class=n>acompany</span><span class=p>])</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>diseases</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>acompany</span><span class=p>)</span>
+
+                <span class=k>if</span> <span class=s1>&#39;desc&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;desc&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;desc&#39;</span><span class=p>]</span>
+
+                <span class=k>if</span> <span class=s1>&#39;prevent&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;prevent&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;prevent&#39;</span><span class=p>]</span>
+
+                <span class=k>if</span> <span class=s1>&#39;cause&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;cause&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;cause&#39;</span><span class=p>]</span>
+
+                <span class=k>if</span> <span class=s1>&#39;get_prob&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;get_prob&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;get_prob&#39;</span><span class=p>]</span>
+
+                <span class=k>if</span> <span class=s1>&#39;easy_get&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;easy_get&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;easy_get&#39;</span><span class=p>]</span>
+
+                <span class=k>if</span> <span class=s1>&#39;cure_department&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>cure_department</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;cure_department&#39;</span><span class=p>]</span>
+                    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>cure_department</span><span class=p>)</span> <span class=o>==</span> <span class=mi>1</span><span class=p>:</span>
+                         <span class=bp>self</span><span class=o>.</span><span class=n>rels_category</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>disease</span><span class=p>,</span> <span class=s1>&#39;cure_department&#39;</span><span class=p>,</span><span class=n>cure_department</span><span class=p>[</span><span class=mi>0</span><span class=p>]])</span>
+                    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>cure_department</span><span class=p>)</span> <span class=o>==</span> <span class=mi>2</span><span class=p>:</span>
+                        <span class=n>big</span> <span class=o>=</span> <span class=n>cure_department</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+                        <span class=n>small</span> <span class=o>=</span> <span class=n>cure_department</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>rels_department</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>small</span><span class=p>,</span><span class=s1>&#39;belongs_to&#39;</span><span class=p>,</span> <span class=n>big</span><span class=p>])</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>rels_category</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>disease</span><span class=p>,</span><span class=s1>&#39;cure_department&#39;</span><span class=p>,</span> <span class=n>small</span><span class=p>])</span>
+
+                    <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;cure_department&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>cure_department</span>
+                    <span class=bp>self</span><span class=o>.</span><span class=n>departments</span> <span class=o>+=</span> <span class=n>cure_department</span>
+
+                <span class=k>if</span> <span class=s1>&#39;cure_way&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;cure_way&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;cure_way&#39;</span><span class=p>]</span>
+
+                <span class=k>if</span>  <span class=s1>&#39;cure_lasttime&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;cure_lasttime&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;cure_lasttime&#39;</span><span class=p>]</span>
+
+                <span class=k>if</span> <span class=s1>&#39;cured_prob&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>disease_dict</span><span class=p>[</span><span class=s1>&#39;cured_prob&#39;</span><span class=p>]</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;cured_prob&#39;</span><span class=p>]</span>
+
+                <span class=k>if</span> <span class=s1>&#39;common_drug&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>common_drug</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;common_drug&#39;</span><span class=p>]</span>
+                    <span class=k>for</span> <span class=n>drug</span> <span class=ow>in</span> <span class=n>common_drug</span><span class=p>:</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>rels_commonddrug</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>disease</span><span class=p>,</span><span class=s1>&#39;has_common_drug&#39;</span><span class=p>,</span> <span class=n>drug</span><span class=p>])</span>
+                    <span class=bp>self</span><span class=o>.</span><span class=n>drugs</span> <span class=o>+=</span> <span class=n>common_drug</span>
+
+                <span class=k>if</span> <span class=s1>&#39;recommand_drug&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>recommand_drug</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;recommand_drug&#39;</span><span class=p>]</span>
+                    <span class=bp>self</span><span class=o>.</span><span class=n>drugs</span> <span class=o>+=</span> <span class=n>recommand_drug</span>
+                    <span class=k>for</span> <span class=n>drug</span> <span class=ow>in</span> <span class=n>recommand_drug</span><span class=p>:</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>rels_recommanddrug</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>disease</span><span class=p>,</span><span class=s1>&#39;recommand_drug&#39;</span><span class=p>,</span> <span class=n>drug</span><span class=p>])</span>
+
+                <span class=k>if</span> <span class=s1>&#39;not_eat&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>not_eat</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;not_eat&#39;</span><span class=p>]</span>
+                    <span class=k>for</span> <span class=n>_not</span> <span class=ow>in</span> <span class=n>not_eat</span><span class=p>:</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>rels_noteat</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>disease</span><span class=p>,</span><span class=s1>&#39;not_eat&#39;</span><span class=p>,</span> <span class=n>_not</span><span class=p>])</span>
+
+                    <span class=bp>self</span><span class=o>.</span><span class=n>foods</span> <span class=o>+=</span> <span class=n>not_eat</span>
+                    <span class=n>do_eat</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;do_eat&#39;</span><span class=p>]</span>
+                    <span class=k>for</span> <span class=n>_do</span> <span class=ow>in</span> <span class=n>do_eat</span><span class=p>:</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>rels_doeat</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>disease</span><span class=p>,</span><span class=s1>&#39;do_eat&#39;</span><span class=p>,</span> <span class=n>_do</span><span class=p>])</span>
+
+                    <span class=bp>self</span><span class=o>.</span><span class=n>foods</span> <span class=o>+=</span> <span class=n>do_eat</span>
+
+                <span class=k>if</span> <span class=s1>&#39;recommand_eat&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>recommand_eat</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;recommand_eat&#39;</span><span class=p>]</span>
+                    <span class=k>for</span> <span class=n>_recommand</span> <span class=ow>in</span> <span class=n>recommand_eat</span><span class=p>:</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>rels_recommandeat</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>disease</span><span class=p>,</span><span class=s1>&#39;recommand_recipes&#39;</span><span class=p>,</span> <span class=n>_recommand</span><span class=p>])</span>
+                    <span class=bp>self</span><span class=o>.</span><span class=n>recipes</span> <span class=o>+=</span> <span class=n>recommand_eat</span>
+
+                <span class=k>if</span> <span class=s1>&#39;check&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=n>check</span> <span class=o>=</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;check&#39;</span><span class=p>]</span>
+                    <span class=k>for</span> <span class=n>_check</span> <span class=ow>in</span> <span class=n>check</span><span class=p>:</span>
+                        <span class=bp>self</span><span class=o>.</span><span class=n>rels_check</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>disease</span><span class=p>,</span> <span class=s1>&#39;need_check&#39;</span><span class=p>,</span> <span class=n>_check</span><span class=p>])</span>
+                    <span class=bp>self</span><span class=o>.</span><span class=n>checks</span> <span class=o>+=</span> <span class=n>check</span>
+
+                <span class=k>if</span> <span class=s1>&#39;drug_detail&#39;</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>:</span>
+                    <span class=k>for</span> <span class=n>det</span> <span class=ow>in</span> <span class=n>data_json</span><span class=p>[</span><span class=s1>&#39;drug_detail&#39;</span><span class=p>]:</span>
+                        <span class=n>det_spilt</span> <span class=o>=</span> <span class=n>det</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;(&#39;</span><span class=p>)</span>
+                        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>det_spilt</span><span class=p>)</span> <span class=o>==</span> <span class=mi>2</span><span class=p>:</span>
+                            <span class=n>p</span><span class=p>,</span><span class=n>d</span> <span class=o>=</span> <span class=n>det_spilt</span>
+                            <span class=n>d</span> <span class=o>=</span> <span class=n>d</span><span class=o>.</span><span class=n>rstrip</span><span class=p>(</span><span class=s1>&#39;)&#39;</span><span class=p>)</span>
+                            <span class=k>if</span> <span class=n>p</span><span class=o>.</span><span class=n>find</span><span class=p>(</span><span class=n>d</span><span class=p>)</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=p>:</span>
+                                <span class=n>p</span> <span class=o>=</span> <span class=n>p</span><span class=o>.</span><span class=n>rstrip</span><span class=p>(</span><span class=n>d</span><span class=p>)</span>
+                            <span class=bp>self</span><span class=o>.</span><span class=n>producers</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>p</span><span class=p>)</span>
+                            <span class=bp>self</span><span class=o>.</span><span class=n>drugs</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>d</span><span class=p>)</span>
+                            <span class=bp>self</span><span class=o>.</span><span class=n>rels_drug_producer</span><span class=o>.</span><span class=n>append</span><span class=p>([</span><span class=n>p</span><span class=p>,</span><span class=s1>&#39;production&#39;</span><span class=p>,</span><span class=n>d</span><span class=p>])</span>
+                        <span class=k>else</span><span class=p>:</span>
+                            <span class=n>d</span> <span class=o>=</span> <span class=n>det_spilt</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+                            <span class=bp>self</span><span class=o>.</span><span class=n>drugs</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>d</span><span class=p>)</span>
+
+                <span class=bp>self</span><span class=o>.</span><span class=n>disease_infos</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>disease_dict</span><span class=p>)</span>
+
+    <span class=k>def</span> <span class=nf>write_nodes</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>entitys</span><span class=p>,</span><span class=n>entity_type</span><span class=p>):</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;写入 </span><span class=si>{0}</span><span class=s2> 实体&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>entity_type</span><span class=p>))</span>
+        <span class=k>for</span> <span class=n>node</span> <span class=ow>in</span> <span class=n>tqdm</span><span class=p>(</span><span class=nb>set</span><span class=p>(</span><span class=n>entitys</span><span class=p>),</span><span class=n>ncols</span><span class=o>=</span><span class=mi>80</span><span class=p>):</span>
+            <span class=n>cql</span> <span class=o>=</span> <span class=s2>&#34;&#34;&#34;MERGE(n:</span><span class=si>{label}</span><span class=s2>{{name:&#39;</span><span class=si>{entity_name}</span><span class=s2>&#39;}})&#34;&#34;&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span>
+                <span class=n>label</span><span class=o>=</span><span class=n>entity_type</span><span class=p>,</span><span class=n>entity_name</span><span class=o>=</span><span class=n>node</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;&#39;&#34;</span><span class=p>,</span><span class=s2>&#34;&#34;</span><span class=p>))</span>
+            <span class=k>try</span><span class=p>:</span>
+                <span class=bp>self</span><span class=o>.</span><span class=n>graph</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>cql</span><span class=p>)</span>
+            <span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+                <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+                <span class=nb>print</span><span class=p>(</span><span class=n>cql</span><span class=p>)</span>
+        
+    <span class=k>def</span> <span class=nf>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>triples</span><span class=p>,</span><span class=n>head_type</span><span class=p>,</span><span class=n>tail_type</span><span class=p>):</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;写入 </span><span class=si>{0}</span><span class=s2> 关系&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>triples</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>1</span><span class=p>]))</span>
+        <span class=k>for</span> <span class=n>head</span><span class=p>,</span><span class=n>relation</span><span class=p>,</span><span class=n>tail</span> <span class=ow>in</span> <span class=n>tqdm</span><span class=p>(</span><span class=n>triples</span><span class=p>,</span><span class=n>ncols</span><span class=o>=</span><span class=mi>80</span><span class=p>):</span>
+            <span class=n>cql</span> <span class=o>=</span> <span class=s2>&#34;&#34;&#34;MATCH(p:</span><span class=si>{head_type}</span><span class=s2>),(q:</span><span class=si>{tail_type}</span><span class=s2>)
+</span><span class=s2>                    WHERE p.name=&#39;</span><span class=si>{head}</span><span class=s2>&#39; AND q.name=&#39;</span><span class=si>{tail}</span><span class=s2>&#39;
+</span><span class=s2>                    MERGE (p)-[r:</span><span class=si>{relation}</span><span class=s2>]-&gt;(q)&#34;&#34;&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span>
+                        <span class=n>head_type</span><span class=o>=</span><span class=n>head_type</span><span class=p>,</span><span class=n>tail_type</span><span class=o>=</span><span class=n>tail_type</span><span class=p>,</span><span class=n>head</span><span class=o>=</span><span class=n>head</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;&#39;&#34;</span><span class=p>,</span><span class=s2>&#34;&#34;</span><span class=p>),</span>
+                        <span class=n>tail</span><span class=o>=</span><span class=n>tail</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;&#39;&#34;</span><span class=p>,</span><span class=s2>&#34;&#34;</span><span class=p>),</span><span class=n>relation</span><span class=o>=</span><span class=n>relation</span><span class=p>)</span>
+            <span class=k>try</span><span class=p>:</span>
+                <span class=bp>self</span><span class=o>.</span><span class=n>graph</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>cql</span><span class=p>)</span>
+            <span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+                <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+                <span class=nb>print</span><span class=p>(</span><span class=n>cql</span><span class=p>)</span>
+
+    <span class=k>def</span> <span class=nf>set_attributes</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>entity_infos</span><span class=p>,</span><span class=n>etype</span><span class=p>):</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;写入 </span><span class=si>{0}</span><span class=s2> 实体的属性&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>etype</span><span class=p>))</span>
+        <span class=k>for</span> <span class=n>e_dict</span> <span class=ow>in</span> <span class=n>tqdm</span><span class=p>(</span><span class=n>entity_infos</span><span class=p>[</span><span class=mi>892</span><span class=p>:],</span><span class=n>ncols</span><span class=o>=</span><span class=mi>80</span><span class=p>):</span>
+            <span class=n>name</span> <span class=o>=</span> <span class=n>e_dict</span><span class=p>[</span><span class=s1>&#39;name&#39;</span><span class=p>]</span>
+            <span class=k>del</span> <span class=n>e_dict</span><span class=p>[</span><span class=s1>&#39;name&#39;</span><span class=p>]</span>
+            <span class=k>for</span> <span class=n>k</span><span class=p>,</span><span class=n>v</span> <span class=ow>in</span> <span class=n>e_dict</span><span class=o>.</span><span class=n>items</span><span class=p>():</span>
+                <span class=k>if</span> <span class=n>k</span> <span class=ow>in</span> <span class=p>[</span><span class=s1>&#39;cure_department&#39;</span><span class=p>,</span><span class=s1>&#39;cure_way&#39;</span><span class=p>]:</span>
+                    <span class=n>cql</span> <span class=o>=</span> <span class=s2>&#34;&#34;&#34;MATCH (n:</span><span class=si>{label}</span><span class=s2>)
+</span><span class=s2>                        WHERE n.name=&#39;</span><span class=si>{name}</span><span class=s2>&#39;
+</span><span class=s2>                        set n.</span><span class=si>{k}</span><span class=s2>=</span><span class=si>{v}</span><span class=s2>&#34;&#34;&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>label</span><span class=o>=</span><span class=n>etype</span><span class=p>,</span><span class=n>name</span><span class=o>=</span><span class=n>name</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;&#39;&#34;</span><span class=p>,</span><span class=s2>&#34;&#34;</span><span class=p>),</span><span class=n>k</span><span class=o>=</span><span class=n>k</span><span class=p>,</span><span class=n>v</span><span class=o>=</span><span class=n>v</span><span class=p>)</span>
+                <span class=k>else</span><span class=p>:</span>
+                    <span class=n>cql</span> <span class=o>=</span> <span class=s2>&#34;&#34;&#34;MATCH (n:</span><span class=si>{label}</span><span class=s2>)
+</span><span class=s2>                        WHERE n.name=&#39;</span><span class=si>{name}</span><span class=s2>&#39;
+</span><span class=s2>                        set n.</span><span class=si>{k}</span><span class=s2>=&#39;</span><span class=si>{v}</span><span class=s2>&#39;&#34;&#34;&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>label</span><span class=o>=</span><span class=n>etype</span><span class=p>,</span><span class=n>name</span><span class=o>=</span><span class=n>name</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;&#39;&#34;</span><span class=p>,</span><span class=s2>&#34;&#34;</span><span class=p>),</span><span class=n>k</span><span class=o>=</span><span class=n>k</span><span class=p>,</span><span class=n>v</span><span class=o>=</span><span class=n>v</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;&#39;&#34;</span><span class=p>,</span><span class=s2>&#34;&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>,</span><span class=s2>&#34;&#34;</span><span class=p>))</span>
+                <span class=k>try</span><span class=p>:</span>
+                    <span class=bp>self</span><span class=o>.</span><span class=n>graph</span><span class=o>.</span><span class=n>run</span><span class=p>(</span><span class=n>cql</span><span class=p>)</span>
+                <span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+                    <span class=nb>print</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+                    <span class=nb>print</span><span class=p>(</span><span class=n>cql</span><span class=p>)</span>
+
+
+    <span class=k>def</span> <span class=nf>create_entitys</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_nodes</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>drugs</span><span class=p>,</span><span class=s1>&#39;药品&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_nodes</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>recipes</span><span class=p>,</span><span class=s1>&#39;菜谱&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_nodes</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>foods</span><span class=p>,</span><span class=s1>&#39;食物&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_nodes</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>checks</span><span class=p>,</span><span class=s1>&#39;检查&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_nodes</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>departments</span><span class=p>,</span><span class=s1>&#39;科室&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_nodes</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>producers</span><span class=p>,</span><span class=s1>&#39;药企&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_nodes</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>diseases</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_nodes</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>symptoms</span><span class=p>,</span><span class=s1>&#39;症状&#39;</span><span class=p>)</span>
+
+    <span class=k>def</span> <span class=nf>create_relations</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_department</span><span class=p>,</span><span class=s1>&#39;科室&#39;</span><span class=p>,</span><span class=s1>&#39;科室&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_noteat</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>,</span><span class=s1>&#39;食物&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_doeat</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>,</span><span class=s1>&#39;食物&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_recommandeat</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>,</span><span class=s1>&#39;菜谱&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_commonddrug</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>,</span><span class=s1>&#39;药品&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_recommanddrug</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>,</span><span class=s1>&#39;药品&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_check</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>,</span><span class=s1>&#39;检查&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_drug_producer</span><span class=p>,</span><span class=s1>&#39;药企&#39;</span><span class=p>,</span><span class=s1>&#39;药品&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_symptom</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>,</span><span class=s1>&#39;症状&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_acompany</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>write_edges</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_category</span><span class=p>,</span><span class=s1>&#39;疾病&#39;</span><span class=p>,</span><span class=s1>&#39;科室&#39;</span><span class=p>)</span>
+
+    <span class=k>def</span> <span class=nf>set_diseases_attributes</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span> 
+        <span class=n>t</span><span class=o>=</span><span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=bp>self</span><span class=o>.</span><span class=n>set_attributes</span><span class=p>,</span><span class=n>args</span><span class=o>=</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>disease_infos</span><span class=p>,</span><span class=s2>&#34;疾病&#34;</span><span class=p>))</span>
+        <span class=n>t</span><span class=o>.</span><span class=n>setDaemon</span><span class=p>(</span><span class=kc>False</span><span class=p>)</span>
+        <span class=n>t</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+
+
+    <span class=k>def</span> <span class=nf>export_data</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span><span class=n>data</span><span class=p>,</span><span class=n>path</span><span class=p>):</span>
+        <span class=k>if</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>data</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span><span class=nb>str</span><span class=p>):</span>
+            <span class=n>data</span> <span class=o>=</span> <span class=nb>sorted</span><span class=p>([</span><span class=n>d</span><span class=o>.</span><span class=n>strip</span><span class=p>(</span><span class=s2>&#34;...&#34;</span><span class=p>)</span> <span class=k>for</span> <span class=n>d</span> <span class=ow>in</span> <span class=nb>set</span><span class=p>(</span><span class=n>data</span><span class=p>)])</span>
+        <span class=k>with</span> <span class=n>codecs</span><span class=o>.</span><span class=n>open</span><span class=p>(</span><span class=n>path</span><span class=p>,</span> <span class=s1>&#39;w&#39;</span><span class=p>,</span> <span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;utf-8&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+            <span class=n>json</span><span class=o>.</span><span class=n>dump</span><span class=p>(</span><span class=n>data</span><span class=p>,</span> <span class=n>f</span><span class=p>,</span> <span class=n>indent</span><span class=o>=</span><span class=mi>4</span><span class=p>,</span> <span class=n>ensure_ascii</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+
+    <span class=k>def</span> <span class=nf>export_entitys_relations</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>drugs</span><span class=p>,</span><span class=s1>&#39;./graph_data/drugs.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>recipes</span><span class=p>,</span><span class=s1>&#39;./graph_data/recipes.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>foods</span><span class=p>,</span><span class=s1>&#39;./graph_data/foods.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>checks</span><span class=p>,</span><span class=s1>&#39;./graph_data/checks.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>departments</span><span class=p>,</span><span class=s1>&#39;./graph_data/departments.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>producers</span><span class=p>,</span><span class=s1>&#39;./graph_data/producers.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>diseases</span><span class=p>,</span><span class=s1>&#39;./graph_data/diseases.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>symptoms</span><span class=p>,</span><span class=s1>&#39;./graph_data/symptoms.json&#39;</span><span class=p>)</span>
+
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_department</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_department.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_noteat</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_noteat.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_doeat</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_doeat.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_recommandeat</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_recommandeat.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_commonddrug</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_commonddrug.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_recommanddrug</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_recommanddrug.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_check</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_check.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_drug_producer</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_drug_producer.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_symptom</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_symptom.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_acompany</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_acompany.json&#39;</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>export_data</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>rels_category</span><span class=p>,</span><span class=s1>&#39;./graph_data/rels_category.json&#39;</span><span class=p>)</span>
+
+
+
+
+<span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+    <span class=n>path</span> <span class=o>=</span> <span class=s2>&#34;./graph_data/medical.json&#34;</span>
+    <span class=n>extractor</span> <span class=o>=</span> <span class=n>MedicalExtractor</span><span class=p>()</span>
+    <span class=n>extractor</span><span class=o>.</span><span class=n>extract_triples</span><span class=p>(</span><span class=n>path</span><span class=p>)</span>
+    <span class=n>extractor</span><span class=o>.</span><span class=n>export_entitys_relations</span><span class=p>()</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>Final Results Demo:</p>
+<p><img loading=lazy src="https://img-blog.csdnimg.cn/d238c245742a4492b8202198ca8d09a5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Yy75a2m5bCP6L6-5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16" alt=img></p>
+</div>
+</div>
+<div class=container>
+<nav class="flex container suggested">
+<a rel=prev href=/post/golang_cheatsheet/ title="Previous post (older)">
+<span>Previous</span>
+Golang Cheatsheet
+</a>
+<a rel=next href=/post/china_eastern_railway/ title="Next post (newer)">
+<span>Next</span>
+Organizing Geospatial Data case study on China Eastern Railway
+</a>
+</nav>
+</div>
+<div class=container>
+</div>
+</main>
+</main>
+<footer class="footer flex">
+<section class=container>
+<nav class=footer-links>
+<a href=/index.xml>RSS</a>
+</nav>
+</section>
+<script defer src=/ts/features.6bec993050976e7360ece802de9df50f61459197c14bd32823dc2d8da0ee964c.js data-enable-footnotes=true></script>
+</footer>
+</body>
+</html>

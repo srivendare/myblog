@@ -218,7 +218,560 @@ alt="img"
 &lt;span class="p">]&lt;/span>
 &lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></description></item><item><title>Golang Cheatsheet</title><link>https://srivendare.github.io/post/golang_cheatsheet/</link><pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/golang_cheatsheet/</guid><description>
+&lt;/div></description></item><item><title>Basic Knowledge Graph in Neo4j</title><link>https://srivendare.github.io/post/building-graphs/</link><pubDate>Wed, 05 Apr 2023 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/building-graphs/</guid><description>
+&lt;p>This repo try extract data from json raw data and build Knowledge graph in Neo4j&lt;/p>
+&lt;p>Raw Data Source:&lt;/p>
+&lt;p>&lt;a href="https://github.com/liuhuanyong/QASystemOnMedicalKG/tree/master/data">https://github.com/liuhuanyong/QASystemOnMedicalKG/tree/master/data&lt;/a>&lt;/p>
+&lt;p>Codes:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt"> 10
+&lt;/span>&lt;span class="lnt"> 11
+&lt;/span>&lt;span class="lnt"> 12
+&lt;/span>&lt;span class="lnt"> 13
+&lt;/span>&lt;span class="lnt"> 14
+&lt;/span>&lt;span class="lnt"> 15
+&lt;/span>&lt;span class="lnt"> 16
+&lt;/span>&lt;span class="lnt"> 17
+&lt;/span>&lt;span class="lnt"> 18
+&lt;/span>&lt;span class="lnt"> 19
+&lt;/span>&lt;span class="lnt"> 20
+&lt;/span>&lt;span class="lnt"> 21
+&lt;/span>&lt;span class="lnt"> 22
+&lt;/span>&lt;span class="lnt"> 23
+&lt;/span>&lt;span class="lnt"> 24
+&lt;/span>&lt;span class="lnt"> 25
+&lt;/span>&lt;span class="lnt"> 26
+&lt;/span>&lt;span class="lnt"> 27
+&lt;/span>&lt;span class="lnt"> 28
+&lt;/span>&lt;span class="lnt"> 29
+&lt;/span>&lt;span class="lnt"> 30
+&lt;/span>&lt;span class="lnt"> 31
+&lt;/span>&lt;span class="lnt"> 32
+&lt;/span>&lt;span class="lnt"> 33
+&lt;/span>&lt;span class="lnt"> 34
+&lt;/span>&lt;span class="lnt"> 35
+&lt;/span>&lt;span class="lnt"> 36
+&lt;/span>&lt;span class="lnt"> 37
+&lt;/span>&lt;span class="lnt"> 38
+&lt;/span>&lt;span class="lnt"> 39
+&lt;/span>&lt;span class="lnt"> 40
+&lt;/span>&lt;span class="lnt"> 41
+&lt;/span>&lt;span class="lnt"> 42
+&lt;/span>&lt;span class="lnt"> 43
+&lt;/span>&lt;span class="lnt"> 44
+&lt;/span>&lt;span class="lnt"> 45
+&lt;/span>&lt;span class="lnt"> 46
+&lt;/span>&lt;span class="lnt"> 47
+&lt;/span>&lt;span class="lnt"> 48
+&lt;/span>&lt;span class="lnt"> 49
+&lt;/span>&lt;span class="lnt"> 50
+&lt;/span>&lt;span class="lnt"> 51
+&lt;/span>&lt;span class="lnt"> 52
+&lt;/span>&lt;span class="lnt"> 53
+&lt;/span>&lt;span class="lnt"> 54
+&lt;/span>&lt;span class="lnt"> 55
+&lt;/span>&lt;span class="lnt"> 56
+&lt;/span>&lt;span class="lnt"> 57
+&lt;/span>&lt;span class="lnt"> 58
+&lt;/span>&lt;span class="lnt"> 59
+&lt;/span>&lt;span class="lnt"> 60
+&lt;/span>&lt;span class="lnt"> 61
+&lt;/span>&lt;span class="lnt"> 62
+&lt;/span>&lt;span class="lnt"> 63
+&lt;/span>&lt;span class="lnt"> 64
+&lt;/span>&lt;span class="lnt"> 65
+&lt;/span>&lt;span class="lnt"> 66
+&lt;/span>&lt;span class="lnt"> 67
+&lt;/span>&lt;span class="lnt"> 68
+&lt;/span>&lt;span class="lnt"> 69
+&lt;/span>&lt;span class="lnt"> 70
+&lt;/span>&lt;span class="lnt"> 71
+&lt;/span>&lt;span class="lnt"> 72
+&lt;/span>&lt;span class="lnt"> 73
+&lt;/span>&lt;span class="lnt"> 74
+&lt;/span>&lt;span class="lnt"> 75
+&lt;/span>&lt;span class="lnt"> 76
+&lt;/span>&lt;span class="lnt"> 77
+&lt;/span>&lt;span class="lnt"> 78
+&lt;/span>&lt;span class="lnt"> 79
+&lt;/span>&lt;span class="lnt"> 80
+&lt;/span>&lt;span class="lnt"> 81
+&lt;/span>&lt;span class="lnt"> 82
+&lt;/span>&lt;span class="lnt"> 83
+&lt;/span>&lt;span class="lnt"> 84
+&lt;/span>&lt;span class="lnt"> 85
+&lt;/span>&lt;span class="lnt"> 86
+&lt;/span>&lt;span class="lnt"> 87
+&lt;/span>&lt;span class="lnt"> 88
+&lt;/span>&lt;span class="lnt"> 89
+&lt;/span>&lt;span class="lnt"> 90
+&lt;/span>&lt;span class="lnt"> 91
+&lt;/span>&lt;span class="lnt"> 92
+&lt;/span>&lt;span class="lnt"> 93
+&lt;/span>&lt;span class="lnt"> 94
+&lt;/span>&lt;span class="lnt"> 95
+&lt;/span>&lt;span class="lnt"> 96
+&lt;/span>&lt;span class="lnt"> 97
+&lt;/span>&lt;span class="lnt"> 98
+&lt;/span>&lt;span class="lnt"> 99
+&lt;/span>&lt;span class="lnt">100
+&lt;/span>&lt;span class="lnt">101
+&lt;/span>&lt;span class="lnt">102
+&lt;/span>&lt;span class="lnt">103
+&lt;/span>&lt;span class="lnt">104
+&lt;/span>&lt;span class="lnt">105
+&lt;/span>&lt;span class="lnt">106
+&lt;/span>&lt;span class="lnt">107
+&lt;/span>&lt;span class="lnt">108
+&lt;/span>&lt;span class="lnt">109
+&lt;/span>&lt;span class="lnt">110
+&lt;/span>&lt;span class="lnt">111
+&lt;/span>&lt;span class="lnt">112
+&lt;/span>&lt;span class="lnt">113
+&lt;/span>&lt;span class="lnt">114
+&lt;/span>&lt;span class="lnt">115
+&lt;/span>&lt;span class="lnt">116
+&lt;/span>&lt;span class="lnt">117
+&lt;/span>&lt;span class="lnt">118
+&lt;/span>&lt;span class="lnt">119
+&lt;/span>&lt;span class="lnt">120
+&lt;/span>&lt;span class="lnt">121
+&lt;/span>&lt;span class="lnt">122
+&lt;/span>&lt;span class="lnt">123
+&lt;/span>&lt;span class="lnt">124
+&lt;/span>&lt;span class="lnt">125
+&lt;/span>&lt;span class="lnt">126
+&lt;/span>&lt;span class="lnt">127
+&lt;/span>&lt;span class="lnt">128
+&lt;/span>&lt;span class="lnt">129
+&lt;/span>&lt;span class="lnt">130
+&lt;/span>&lt;span class="lnt">131
+&lt;/span>&lt;span class="lnt">132
+&lt;/span>&lt;span class="lnt">133
+&lt;/span>&lt;span class="lnt">134
+&lt;/span>&lt;span class="lnt">135
+&lt;/span>&lt;span class="lnt">136
+&lt;/span>&lt;span class="lnt">137
+&lt;/span>&lt;span class="lnt">138
+&lt;/span>&lt;span class="lnt">139
+&lt;/span>&lt;span class="lnt">140
+&lt;/span>&lt;span class="lnt">141
+&lt;/span>&lt;span class="lnt">142
+&lt;/span>&lt;span class="lnt">143
+&lt;/span>&lt;span class="lnt">144
+&lt;/span>&lt;span class="lnt">145
+&lt;/span>&lt;span class="lnt">146
+&lt;/span>&lt;span class="lnt">147
+&lt;/span>&lt;span class="lnt">148
+&lt;/span>&lt;span class="lnt">149
+&lt;/span>&lt;span class="lnt">150
+&lt;/span>&lt;span class="lnt">151
+&lt;/span>&lt;span class="lnt">152
+&lt;/span>&lt;span class="lnt">153
+&lt;/span>&lt;span class="lnt">154
+&lt;/span>&lt;span class="lnt">155
+&lt;/span>&lt;span class="lnt">156
+&lt;/span>&lt;span class="lnt">157
+&lt;/span>&lt;span class="lnt">158
+&lt;/span>&lt;span class="lnt">159
+&lt;/span>&lt;span class="lnt">160
+&lt;/span>&lt;span class="lnt">161
+&lt;/span>&lt;span class="lnt">162
+&lt;/span>&lt;span class="lnt">163
+&lt;/span>&lt;span class="lnt">164
+&lt;/span>&lt;span class="lnt">165
+&lt;/span>&lt;span class="lnt">166
+&lt;/span>&lt;span class="lnt">167
+&lt;/span>&lt;span class="lnt">168
+&lt;/span>&lt;span class="lnt">169
+&lt;/span>&lt;span class="lnt">170
+&lt;/span>&lt;span class="lnt">171
+&lt;/span>&lt;span class="lnt">172
+&lt;/span>&lt;span class="lnt">173
+&lt;/span>&lt;span class="lnt">174
+&lt;/span>&lt;span class="lnt">175
+&lt;/span>&lt;span class="lnt">176
+&lt;/span>&lt;span class="lnt">177
+&lt;/span>&lt;span class="lnt">178
+&lt;/span>&lt;span class="lnt">179
+&lt;/span>&lt;span class="lnt">180
+&lt;/span>&lt;span class="lnt">181
+&lt;/span>&lt;span class="lnt">182
+&lt;/span>&lt;span class="lnt">183
+&lt;/span>&lt;span class="lnt">184
+&lt;/span>&lt;span class="lnt">185
+&lt;/span>&lt;span class="lnt">186
+&lt;/span>&lt;span class="lnt">187
+&lt;/span>&lt;span class="lnt">188
+&lt;/span>&lt;span class="lnt">189
+&lt;/span>&lt;span class="lnt">190
+&lt;/span>&lt;span class="lnt">191
+&lt;/span>&lt;span class="lnt">192
+&lt;/span>&lt;span class="lnt">193
+&lt;/span>&lt;span class="lnt">194
+&lt;/span>&lt;span class="lnt">195
+&lt;/span>&lt;span class="lnt">196
+&lt;/span>&lt;span class="lnt">197
+&lt;/span>&lt;span class="lnt">198
+&lt;/span>&lt;span class="lnt">199
+&lt;/span>&lt;span class="lnt">200
+&lt;/span>&lt;span class="lnt">201
+&lt;/span>&lt;span class="lnt">202
+&lt;/span>&lt;span class="lnt">203
+&lt;/span>&lt;span class="lnt">204
+&lt;/span>&lt;span class="lnt">205
+&lt;/span>&lt;span class="lnt">206
+&lt;/span>&lt;span class="lnt">207
+&lt;/span>&lt;span class="lnt">208
+&lt;/span>&lt;span class="lnt">209
+&lt;/span>&lt;span class="lnt">210
+&lt;/span>&lt;span class="lnt">211
+&lt;/span>&lt;span class="lnt">212
+&lt;/span>&lt;span class="lnt">213
+&lt;/span>&lt;span class="lnt">214
+&lt;/span>&lt;span class="lnt">215
+&lt;/span>&lt;span class="lnt">216
+&lt;/span>&lt;span class="lnt">217
+&lt;/span>&lt;span class="lnt">218
+&lt;/span>&lt;span class="lnt">219
+&lt;/span>&lt;span class="lnt">220
+&lt;/span>&lt;span class="lnt">221
+&lt;/span>&lt;span class="lnt">222
+&lt;/span>&lt;span class="lnt">223
+&lt;/span>&lt;span class="lnt">224
+&lt;/span>&lt;span class="lnt">225
+&lt;/span>&lt;span class="lnt">226
+&lt;/span>&lt;span class="lnt">227
+&lt;/span>&lt;span class="lnt">228
+&lt;/span>&lt;span class="lnt">229
+&lt;/span>&lt;span class="lnt">230
+&lt;/span>&lt;span class="lnt">231
+&lt;/span>&lt;span class="lnt">232
+&lt;/span>&lt;span class="lnt">233
+&lt;/span>&lt;span class="lnt">234
+&lt;/span>&lt;span class="lnt">235
+&lt;/span>&lt;span class="lnt">236
+&lt;/span>&lt;span class="lnt">237
+&lt;/span>&lt;span class="lnt">238
+&lt;/span>&lt;span class="lnt">239
+&lt;/span>&lt;span class="lnt">240
+&lt;/span>&lt;span class="lnt">241
+&lt;/span>&lt;span class="lnt">242
+&lt;/span>&lt;span class="lnt">243
+&lt;/span>&lt;span class="lnt">244
+&lt;/span>&lt;span class="lnt">245
+&lt;/span>&lt;span class="lnt">246
+&lt;/span>&lt;span class="lnt">247
+&lt;/span>&lt;span class="lnt">248
+&lt;/span>&lt;span class="lnt">249
+&lt;/span>&lt;span class="lnt">250
+&lt;/span>&lt;span class="lnt">251
+&lt;/span>&lt;span class="lnt">252
+&lt;/span>&lt;span class="lnt">253
+&lt;/span>&lt;span class="lnt">254
+&lt;/span>&lt;span class="lnt">255
+&lt;/span>&lt;span class="lnt">256
+&lt;/span>&lt;span class="lnt">257
+&lt;/span>&lt;span class="lnt">258
+&lt;/span>&lt;span class="lnt">259
+&lt;/span>&lt;span class="lnt">260
+&lt;/span>&lt;span class="lnt">261
+&lt;/span>&lt;span class="lnt">262
+&lt;/span>&lt;span class="lnt">263
+&lt;/span>&lt;span class="lnt">264
+&lt;/span>&lt;span class="lnt">265
+&lt;/span>&lt;span class="lnt">266
+&lt;/span>&lt;span class="lnt">267
+&lt;/span>&lt;span class="lnt">268
+&lt;/span>&lt;span class="lnt">269
+&lt;/span>&lt;span class="lnt">270
+&lt;/span>&lt;span class="lnt">271
+&lt;/span>&lt;span class="lnt">272
+&lt;/span>&lt;span class="lnt">273
+&lt;/span>&lt;span class="lnt">274
+&lt;/span>&lt;span class="lnt">275
+&lt;/span>&lt;span class="lnt">276
+&lt;/span>&lt;span class="lnt">277
+&lt;/span>&lt;span class="lnt">278
+&lt;/span>&lt;span class="lnt">279
+&lt;/span>&lt;span class="lnt">280
+&lt;/span>&lt;span class="lnt">281
+&lt;/span>&lt;span class="lnt">282
+&lt;/span>&lt;span class="lnt">283
+&lt;/span>&lt;span class="lnt">284
+&lt;/span>&lt;span class="lnt">285
+&lt;/span>&lt;span class="lnt">286
+&lt;/span>&lt;span class="lnt">287
+&lt;/span>&lt;span class="lnt">288
+&lt;/span>&lt;span class="lnt">289
+&lt;/span>&lt;span class="lnt">290
+&lt;/span>&lt;span class="lnt">291
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="c1">#encoding:utf8&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">os&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">re&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">json&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">codecs&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">threading&lt;/span>
+&lt;span class="kn">from&lt;/span> &lt;span class="nn">py2neo&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">Graph&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">pandas&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">pd&lt;/span>
+&lt;span class="kn">import&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">np&lt;/span>
+&lt;span class="kn">from&lt;/span> &lt;span class="nn">tqdm&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">tqdm&lt;/span>
+&lt;span class="c1">### Get data Info&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">print_data_info&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data_path&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="n">triples&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;span class="n">i&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data_path&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;r&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">encoding&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;utf8&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">f&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">line&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">f&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">readlines&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">json&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loads&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">line&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">json&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dumps&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">sort_keys&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">indent&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">separators&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;, &amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;: &amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="n">ensure_ascii&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="n">i&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">break&lt;/span>
+&lt;span class="k">return&lt;/span> &lt;span class="n">triples&lt;/span>
+&lt;span class="c1">### Extraction Object&lt;/span>
+&lt;span class="k">class&lt;/span> &lt;span class="nc">MedicalExtractor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">object&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="fm">__init__&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="nb">super&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">MedicalExtractor&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="bp">self&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="fm">__init__&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">graph&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">Graph&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;span class="n">host&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;127.0.0.1&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="n">http_port&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">7474&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="n">user&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;neo4j&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;span class="n">password&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;123456&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="c1"># 共8类节点&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">drugs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1"># 药品&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recipes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1">#菜谱&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">foods&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1">#　食物&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">checks&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1"># 检查&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">departments&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1">#科室&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">producers&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1">#药企&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">diseases&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1">#疾病&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">symptoms&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="c1">#症状&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">disease_infos&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>&lt;span class="c1">#疾病信息&lt;/span>
+&lt;span class="c1"># 构建节点实体关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_department&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1">#　科室－科室关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_noteat&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1"># 疾病－忌吃食物关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_doeat&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1"># 疾病－宜吃食物关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_recommandeat&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1"># 疾病－推荐吃食物关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_commonddrug&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1"># 疾病－通用药品关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_recommanddrug&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1"># 疾病－热门药品关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_check&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1"># 疾病－检查关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_drug_producer&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1"># 厂商－药物关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_symptom&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1">#疾病症状关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_acompany&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1"># 疾病并发关系&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_category&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span> &lt;span class="c1">#　疾病与科室之间的关系&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">extract_triples&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">data_path&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;从json文件中转换抽取三元组&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data_path&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;r&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">encoding&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;utf8&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">f&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">line&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">tqdm&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">f&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">readlines&lt;/span>&lt;span class="p">(),&lt;/span>&lt;span class="n">ncols&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">80&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="n">data_json&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">json&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loads&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">line&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">disease_dict&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;span class="n">disease&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;name&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;name&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">disease&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">diseases&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;desc&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;prevent&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cause&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;easy_get&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cure_department&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cure_way&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cure_lasttime&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;symptom&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cured_prob&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;symptom&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">symptoms&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;symptom&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">symptom&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;symptom&amp;#39;&lt;/span>&lt;span class="p">]:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_symptom&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;has_symptom&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">symptom&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;acompany&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">acompany&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;acompany&amp;#39;&lt;/span>&lt;span class="p">]:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_acompany&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;acompany_with&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">acompany&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">diseases&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">acompany&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;desc&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;desc&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;desc&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;prevent&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;prevent&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;prevent&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;cause&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cause&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cause&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;get_prob&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;get_prob&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;get_prob&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;easy_get&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;easy_get&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;easy_get&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;cure_department&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">cure_department&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cure_department&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cure_department&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_category&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;cure_department&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">cure_department&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]])&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cure_department&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">big&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cure_department&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="n">small&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cure_department&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_department&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">small&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;belongs_to&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">big&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_category&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;cure_department&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">small&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cure_department&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cure_department&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">departments&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">cure_department&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;cure_way&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cure_way&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cure_way&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;cure_lasttime&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cure_lasttime&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cure_lasttime&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;cured_prob&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cured_prob&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cured_prob&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;common_drug&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">common_drug&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;common_drug&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">drug&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">common_drug&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_commonddrug&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;has_common_drug&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">drug&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">drugs&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">common_drug&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;recommand_drug&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">recommand_drug&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;recommand_drug&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">drugs&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">recommand_drug&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">drug&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">recommand_drug&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_recommanddrug&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;recommand_drug&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">drug&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;not_eat&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">not_eat&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;not_eat&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">_not&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">not_eat&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_noteat&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;not_eat&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">_not&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">foods&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">not_eat&lt;/span>
+&lt;span class="n">do_eat&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;do_eat&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">_do&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">do_eat&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_doeat&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;do_eat&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">_do&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">foods&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">do_eat&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;recommand_eat&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">recommand_eat&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;recommand_eat&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">_recommand&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">recommand_eat&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_recommandeat&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;recommand_recipes&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">_recommand&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recipes&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">recommand_eat&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;check&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">check&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;check&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">_check&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">check&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_check&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">disease&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;need_check&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">_check&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">checks&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">check&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;drug_detail&amp;#39;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">det&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">data_json&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;drug_detail&amp;#39;&lt;/span>&lt;span class="p">]:&lt;/span>
+&lt;span class="n">det_spilt&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">det&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;(&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">det_spilt&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">p&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">det_spilt&lt;/span>
+&lt;span class="n">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">d&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rstrip&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;)&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;gt;&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rstrip&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">producers&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">drugs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_drug_producer&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;production&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">d&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">det_spilt&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">drugs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">disease_infos&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">disease_dict&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">write_nodes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">entitys&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">entity_type&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;写入 &lt;/span>&lt;span class="si">{0}&lt;/span>&lt;span class="s2"> 实体&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">entity_type&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">node&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">tqdm&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">entitys&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="n">ncols&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">80&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="n">cql&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;MERGE(n:&lt;/span>&lt;span class="si">{label}&lt;/span>&lt;span class="s2">{{name:&amp;#39;&lt;/span>&lt;span class="si">{entity_name}&lt;/span>&lt;span class="s2">&amp;#39;}})&amp;#34;&amp;#34;&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">format&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;span class="n">label&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">entity_type&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">entity_name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#39;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="k">try&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">graph&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cql&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">except&lt;/span> &lt;span class="ne">Exception&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cql&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">triples&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">head_type&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">tail_type&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;写入 &lt;/span>&lt;span class="si">{0}&lt;/span>&lt;span class="s2"> 关系&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">triples&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]))&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">head&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">relation&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">tail&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">tqdm&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">triples&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">ncols&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">80&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="n">cql&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;MATCH(p:&lt;/span>&lt;span class="si">{head_type}&lt;/span>&lt;span class="s2">),(q:&lt;/span>&lt;span class="si">{tail_type}&lt;/span>&lt;span class="s2">)
+&lt;/span>&lt;span class="s2"> WHERE p.name=&amp;#39;&lt;/span>&lt;span class="si">{head}&lt;/span>&lt;span class="s2">&amp;#39; AND q.name=&amp;#39;&lt;/span>&lt;span class="si">{tail}&lt;/span>&lt;span class="s2">&amp;#39;
+&lt;/span>&lt;span class="s2"> MERGE (p)-[r:&lt;/span>&lt;span class="si">{relation}&lt;/span>&lt;span class="s2">]-&amp;gt;(q)&amp;#34;&amp;#34;&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">format&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;span class="n">head_type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">head_type&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">tail_type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">tail_type&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">head&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">head&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#39;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;span class="n">tail&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">tail&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#39;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="n">relation&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">relation&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">try&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">graph&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cql&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">except&lt;/span> &lt;span class="ne">Exception&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cql&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">set_attributes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">entity_infos&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">etype&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;写入 &lt;/span>&lt;span class="si">{0}&lt;/span>&lt;span class="s2"> 实体的属性&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">etype&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">e_dict&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">tqdm&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">entity_infos&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">892&lt;/span>&lt;span class="p">:],&lt;/span>&lt;span class="n">ncols&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">80&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="n">name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">e_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;name&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">del&lt;/span> &lt;span class="n">e_dict&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;name&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;span class="k">for&lt;/span> &lt;span class="n">k&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">v&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">e_dict&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">items&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="n">k&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;cure_department&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;cure_way&amp;#39;&lt;/span>&lt;span class="p">]:&lt;/span>
+&lt;span class="n">cql&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;MATCH (n:&lt;/span>&lt;span class="si">{label}&lt;/span>&lt;span class="s2">)
+&lt;/span>&lt;span class="s2"> WHERE n.name=&amp;#39;&lt;/span>&lt;span class="si">{name}&lt;/span>&lt;span class="s2">&amp;#39;
+&lt;/span>&lt;span class="s2"> set n.&lt;/span>&lt;span class="si">{k}&lt;/span>&lt;span class="s2">=&lt;/span>&lt;span class="si">{v}&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">label&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">etype&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#39;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">v&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">v&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">cql&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&amp;#34;MATCH (n:&lt;/span>&lt;span class="si">{label}&lt;/span>&lt;span class="s2">)
+&lt;/span>&lt;span class="s2"> WHERE n.name=&amp;#39;&lt;/span>&lt;span class="si">{name}&lt;/span>&lt;span class="s2">&amp;#39;
+&lt;/span>&lt;span class="s2"> set n.&lt;/span>&lt;span class="si">{k}&lt;/span>&lt;span class="s2">=&amp;#39;&lt;/span>&lt;span class="si">{v}&lt;/span>&lt;span class="s2">&amp;#39;&amp;#34;&amp;#34;&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">label&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">etype&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#39;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">),&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">k&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">v&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">v&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#39;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="k">try&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">graph&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cql&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">except&lt;/span> &lt;span class="ne">Exception&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cql&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">create_entitys&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_nodes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">drugs&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;药品&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_nodes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recipes&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;菜谱&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_nodes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">foods&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;食物&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_nodes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">checks&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;检查&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_nodes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">departments&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;科室&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_nodes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">producers&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;药企&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_nodes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">diseases&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_nodes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">symptoms&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;症状&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">create_relations&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_department&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;科室&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;科室&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_noteat&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;食物&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_doeat&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;食物&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_recommandeat&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;菜谱&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_commonddrug&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;药品&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_recommanddrug&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;药品&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_check&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;检查&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_drug_producer&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;药企&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;药品&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_symptom&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;症状&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_acompany&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write_edges&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_category&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;疾病&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;科室&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">set_diseases_attributes&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="n">t&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">threading&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">Thread&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">set_attributes&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">args&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">disease_infos&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s2">&amp;#34;疾病&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;span class="n">t&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">setDaemon&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">t&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">start&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="nb">isinstance&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">],&lt;/span>&lt;span class="nb">str&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">sorted&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="n">d&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">strip&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;...&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">d&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)])&lt;/span>
+&lt;span class="k">with&lt;/span> &lt;span class="n">codecs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;w&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">encoding&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;utf-8&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">f&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">json&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dump&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">f&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">indent&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ensure_ascii&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">def&lt;/span> &lt;span class="nf">export_entitys_relations&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">drugs&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/drugs.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">recipes&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/recipes.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">foods&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/foods.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">checks&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/checks.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">departments&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/departments.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">producers&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/producers.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">diseases&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/diseases.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">symptoms&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/symptoms.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_department&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_department.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_noteat&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_noteat.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_doeat&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_doeat.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_recommandeat&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_recommandeat.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_commonddrug&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_commonddrug.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_recommanddrug&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_recommanddrug.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_check&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_check.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_drug_producer&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_drug_producer.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_symptom&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_symptom.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_acompany&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_acompany.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_data&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">rels_category&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s1">&amp;#39;./graph_data/rels_category.json&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s1">&amp;#39;__main__&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;span class="n">path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;./graph_data/medical.json&amp;#34;&lt;/span>
+&lt;span class="n">extractor&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MedicalExtractor&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;span class="n">extractor&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">extract_triples&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;span class="n">extractor&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">export_entitys_relations&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Final Results Demo:&lt;/p>
+&lt;p>&lt;img loading="lazy"
+src="https://img-blog.csdnimg.cn/d238c245742a4492b8202198ca8d09a5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5Yy75a2m5bCP6L6-5Lq6,size_20,color_FFFFFF,t_70,g_se,x_16"
+alt="img"
+/>&lt;/p></description></item><item><title>Golang Cheatsheet</title><link>https://srivendare.github.io/post/golang_cheatsheet/</link><pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/golang_cheatsheet/</guid><description>
 &lt;p>2022-03-06&lt;/p>
 &lt;p>Recently I need to maintain colleague&amp;rsquo;s web scrapers in Golang, here are some notes I took during self-learning, I will keep on updating this article&lt;/p>
 &lt;ol>
