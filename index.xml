@@ -1,4 +1,81 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sanggiya</title><link>https://srivendare.github.io/</link><description>Recent content on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 23 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Rebuild workflow of my personal blog</title><link>https://srivendare.github.io/post/rebuild_myblog/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/rebuild_myblog/</guid><description/></item><item><title>Organizing Geospatial Data case study on China Eastern Railway</title><link>https://srivendare.github.io/post/china_eastern_railway/</link><pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/china_eastern_railway/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sanggiya</title><link>https://srivendare.github.io/</link><description>Recent content on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 19 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>How to form an effective prompt to ChatGPT</title><link>https://srivendare.github.io/post/prompt_format/</link><pubDate>Wed, 19 Jul 2023 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/prompt_format/</guid><description>
+&lt;p>Thanks to Andrew Ng&amp;rsquo;s prompt engineering course, I summarize some writing principles for preparing a prompt to ChatBot.&lt;/p>
+&lt;p>A holistic prompt should inludes3 types of content&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>The role that you want Chatbot to work as&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Task Setting and the direction you want to want on with&lt;/p>
+&lt;p>a. Specific Task description, which involves procedures&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>​ b. An Example&lt;/p>
+&lt;ol start="3">
+&lt;li>Hints, such as output requirement etc&lt;/li>
+&lt;/ol>
+&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="s1">&amp;#39;&amp;#39;&amp;#39;
+&lt;/span>&lt;span class="s1">[Role] Hi Chatbot!
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1">You are a professional Mechine Learning Engineer, specialize in entity recognition, text summarization, and are proficient in incontext-learning.
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1">[Task]
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1"> Your task: extracting entities from the artical below, and then summary the article content, then evaluate your summary
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1">[Procedure]
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1"> 1、Go throught the artical and fully grasp the theme, style, and key information of the text
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1"> 2、Extract named entities, such as time, place, characters and other key information
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1"> e.g [&amp;#39;Charlie&amp;#39;, &amp;#39;London&amp;#39;, &amp;#39;Watching Movie&amp;#39;, &amp;#39;Lake District&amp;#39; ]
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1"> 3、Do the text summary, do not lose the key information
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1"> 4、Score the quality of the text summary
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1">[Hints]
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1">1. Evaluation score should be from 1 -10
+&lt;/span>&lt;span class="s1">2. Output data should be in Json format
+&lt;/span>&lt;span class="s1">
+&lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&amp;#39;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Rebuild workflow of my personal blog</title><link>https://srivendare.github.io/post/rebuild_myblog/</link><pubDate>Tue, 23 May 2023 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/rebuild_myblog/</guid><description/></item><item><title>Organizing Geospatial Data case study on China Eastern Railway</title><link>https://srivendare.github.io/post/china_eastern_railway/</link><pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>Rui</author><guid>https://srivendare.github.io/post/china_eastern_railway/</guid><description>
 &lt;p>This article is about some random outcomes for organizing info in a Multi Language Maps.&lt;/p>
 &lt;p>The Original Map Image is in both Russian and Traditional Chinese:&lt;/p>
 &lt;p>&lt;img loading="lazy"

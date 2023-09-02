@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ChatGPT on Sanggiya</title><link>https://srivendare.github.io/categories/chatgpt/</link><description>Recent content in ChatGPT on Sanggiya</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 19 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://srivendare.github.io/categories/chatgpt/index.xml" rel="self" type="application/rss+xml"/><item><title>How to form an effective prompt to ChatGPT</title><link>https://srivendare.github.io/post/prompt_format/</link><pubDate>Wed, 19 Jul 2023 00:00:00 +0000</pubDate><guid>https://srivendare.github.io/post/prompt_format/</guid><description>Thanks to Andrew Ng&amp;rsquo;s prompt engineering course, I summarize some writing principles for preparing a prompt to ChatBot.
+A holistic prompt should inludes3 types of content
+The role that you want Chatbot to work as
+Task Setting and the direction you want to want on with
+a. Specific Task description, which involves procedures
+​ b. An Example
+Hints, such as output requirement etc Example:</description></item></channel></rss>
